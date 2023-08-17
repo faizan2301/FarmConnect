@@ -5,17 +5,16 @@ import {
   TextInput,
   View,
   Modal,
-  ActivityIndicator,
-  Pressable,
 } from 'react-native';
 import React, {useState, useRef} from 'react';
 import * as Animatable from 'react-native-animatable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import BackGround from '../../components/Background';
+import BackGround from '../../components/SignUpBackground';
 import LottieView from 'lottie-react-native';
 import imageConstant from '../../constant/imageConstant';
 import navigationStrings from '../../constant/navigationStrings';
-const Login = props => {
+
+const SignUp = props => {
   const {navigation} = props;
   const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -25,9 +24,6 @@ const Login = props => {
   const [focusedInput, setFocusedInput] = useState('');
   const [modalVal, setModalVal] = useState(false);
   const bounceAniref = useRef();
-  const onPress = () => {
-    navigation.push(navigationStrings.SIGNUPSCREEN);
-  };
   const onLogin = () => {
     // Validate mobile number
     if (!/^\d{10}$/.test(mobileNumber)) {
@@ -127,15 +123,9 @@ const Login = props => {
         <TouchableOpacity
           onPress={onLogin}
           className="w-full bg-[#30893b] p-4 mt-6 rounded-lg items-center justify-center">
-          <Text className="text-[#fff] text-xl">Login</Text>
+          <Text className="text-[#fff] text-xl">Register</Text>
         </TouchableOpacity>
       </Animatable.View>
-      <Text className="text-black text-lg self-center items-center justify-center-center mt-4">
-        Don't have an account?{' '}
-        <Text onPress={onPress} className="text-[#30893b] font-bold">
-          Register
-        </Text>
-      </Text>
     </BackGround>
   );
 };
@@ -194,4 +184,4 @@ const styles = StyleSheet.create({
   },
   lottieStyle: {height: 200, width: 200, alignSelf: 'center'},
 });
-export default Login;
+export default SignUp;

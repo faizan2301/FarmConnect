@@ -1,6 +1,6 @@
 import React from 'react';
 import navigationStrings from '../constant/navigationStrings';
-import {LoginScreen, SplashScreen} from '../screens';
+import {LoginScreen, SignUpScreen, SplashScreen} from '../screens';
 import DeliveryTabRoutes from './DeliveryTabRoutes';
 
 const MainStack = Stack => {
@@ -14,6 +14,11 @@ const MainStack = Stack => {
       <Stack.Screen
         name={navigationStrings.LOGINSCREEN}
         component={LoginScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={navigationStrings.SIGNUPSCREEN}
+        component={SignUpScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen

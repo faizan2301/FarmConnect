@@ -27,7 +27,9 @@ const BackGround = ({children}) => {
           {/* <Image source={imageConstant.loginLogo} className="h-28  w-24 mt-6 " /> */}
           <View className="h-12" />
           <Text className="text-black text-xl mt-12">Welcome!</Text>
-          <Text className="text-black text-3xl mt-6 font-bold">Sign in to</Text>
+          <Text className="text-black text-3xl mt-6 font-bold">
+            Register in to
+          </Text>
 
           <Text className="text-black text-xl  mb-4">Farm Connect app.</Text>
 
