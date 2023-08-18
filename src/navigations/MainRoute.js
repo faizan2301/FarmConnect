@@ -1,7 +1,14 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import navigationStrings from '../constant/navigationStrings';
-import {LoginScreen, SignUpScreen, SplashScreen} from '../screens';
-import DeliveryTabRoutes from './DeliveryTabRoutes';
+import {
+  LoginScreen,
+  SignUpScreen,
+  SplashScreen,
+  VerifyOtpScreen,
+} from '../screens';
+import TabRoutes from './TabRoutes';
+import HeaderComponent from '../components/HeaderComponent';
 
 const MainStack = Stack => {
   return (
@@ -22,8 +29,23 @@ const MainStack = Stack => {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name={navigationStrings.DELIVERYBOTTOMTAB}
-        component={DeliveryTabRoutes}
+        name={navigationStrings.VERIFYOTPSCREEN}
+        component={VerifyOtpScreen}
+        options={({navigation}) => {
+          return {
+            headerTitle: () => (
+              <HeaderComponent
+                navigation={navigation}
+                title={'Verify otp'}
+                isBack={false}
+              />
+            ),
+          };
+        }}
+      />
+      <Stack.Screen
+        name={navigationStrings.BOTTOMTAB}
+        component={TabRoutes}
         options={{headerShown: false}}
       />
     </>

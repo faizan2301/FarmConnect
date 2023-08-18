@@ -16,6 +16,10 @@ import navigationStrings from '../../constant/navigationStrings';
 
 const SignUp = props => {
   const {navigation} = props;
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -26,23 +30,42 @@ const SignUp = props => {
   const bounceAniref = useRef();
   const onLogin = () => {
     // Validate mobile number
+    if (!/^[A-Za-z\s]+$/.test(name) || name.length < 2) {
+      setNameError('Please enter a valid name');
+      animate();
+      return;
+    } else {
+      setNameError('');
+    }
+    if (!/^[A-Za-z\d._-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+      setEmailError('Please enter a valid email');
+      animate();
+      return;
+    } else {
+      setEmailError('');
+    }
+
     if (!/^\d{10}$/.test(mobileNumber)) {
       setMobileError('Please enter a valid 10-digit mobile number');
       animate();
       return;
+    } else {
+      setMobileError('');
     }
 
-    // Validate password
     if (password.length < 4) {
+      // Validate password
       setPasswordError('Password must be at least 4 characters long');
       animate();
       return;
+    } else {
+      setPasswordError('');
     }
     setModalVal(true);
     const interval = setInterval(() => {
       clearInterval(interval);
       setModalVal(false);
-      navigation.replace(navigationStrings.DELIVERYBOTTOMTAB);
+      navigation.push(navigationStrings.VERIFYOTPSCREEN);
     }, 5000);
   };
   const animate = () => {
@@ -68,6 +91,42 @@ const SignUp = props => {
           </View>
         </View>
       </Modal>
+      <Text className="text-black text-xl mb-2">Name</Text>
+      <TextInput
+        style={[
+          styles.input,
+          focusedInput === 'name' && styles.inputFocused,
+          nameError && styles.inputError,
+        ]}
+        placeholder="Name"
+        keyboardType="ascii-capable"
+        value={name}
+        onFocus={() => setFocusedInput('name')}
+        onBlur={() => setFocusedInput('')}
+        onChangeText={text => {
+          setName(text);
+          setNameError('');
+        }}
+      />
+      {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
+      <Text className="text-black text-xl mb-2">Email</Text>
+      <TextInput
+        style={[
+          styles.input,
+          focusedInput === 'email' && styles.inputFocused,
+          emailError && styles.inputError,
+        ]}
+        placeholder="Email"
+        keyboardType="email-address"
+        value={email}
+        onFocus={() => setFocusedInput('email')}
+        onBlur={() => setFocusedInput('')}
+        onChangeText={text => {
+          setEmail(text);
+          setEmailError('');
+        }}
+      />
+      {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
       <Text className="text-black text-xl mb-2">Mobile number</Text>
       <TextInput
         style={[

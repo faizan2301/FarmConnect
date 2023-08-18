@@ -46,7 +46,7 @@ const Login = props => {
     const interval = setInterval(() => {
       clearInterval(interval);
       setModalVal(false);
-      navigation.replace(navigationStrings.DELIVERYBOTTOMTAB);
+      navigation.replace(navigationStrings.BOTTOMTAB);
     }, 5000);
   };
   const animate = () => {
