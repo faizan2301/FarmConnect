@@ -8,4 +8,5 @@ export default {
   PROFILESCREEN: 'ProfileScreen',
   HOMESCREEN: 'HomeScreen',
   BOTTOMTAB: 'BottomTab',
+  PRODUCTDETAILSCREEN: 'ProductDetailScreen',
 };

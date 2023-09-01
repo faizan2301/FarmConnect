@@ -13,12 +13,15 @@ const TabRoutes = () => {
       screenOptions={{
         tabBarActiveTintColor: '#30893b',
         headerShown: false,
+        headerBackVisible: false,
       }}>
       <Tab.Screen
         name={navigationStrings.HOMESTACK}
         component={HomeStack}
         options={({navigation}) => {
           return {
+            headerBackVisible: false,
+
             tabBarLabel: 'Home',
             tabBarIcon: ({color, size}) => (
               <MaterialCommunityIcons name="home" color={color} size={size} />
@@ -31,6 +34,7 @@ const TabRoutes = () => {
         component={ProfileStack}
         options={({navigation}) => {
           return {
+            headerBackVisible: false,
             tabBarLabel: 'Profile',
             tabBarIcon: ({color, size}) => (
               <MaterialCommunityIcons

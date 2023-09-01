@@ -2,12 +2,18 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import navigationStrings from '../constant/navigationStrings';
-import {HomeScreen} from '../screens';
+import {HomeScreen, ProductDetailScreen} from '../screens';
 import HeaderComponent from '../components/HeaderComponent';
+
 const Stack = createNativeStackNavigator();
 const HomeStack = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: true}}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: true,
+        headerBackVisible: false,
+        animation: 'slide_from_right',
+      }}>
       <Stack.Screen
         name={navigationStrings.HOMESCREEN}
         component={HomeScreen}
@@ -18,6 +24,22 @@ const HomeStack = () => {
                 navigation={navigation}
                 title={'Home'}
                 isBack={false}
+              />
+            ),
+          };
+        }}
+      />
+      <Stack.Screen
+        name={navigationStrings.PRODUCTDETAILSCREEN}
+        component={ProductDetailScreen}
+        options={({navigation}) => {
+          return {
+            headerBackVisible: false,
+            headerTitle: () => (
+              <HeaderComponent
+                navigation={navigation}
+                title={'Product Detail'}
+                isBack={true}
               />
             ),
           };
