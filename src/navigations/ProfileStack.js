@@ -8,7 +8,11 @@ import HeaderComponent from '../components/HeaderComponent';
 
 const ProfileStack = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: true}}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: true,
+        headerStyle: {backgroundColor: '#99CC99'},
+      }}>
       <Stack.Screen
         name={navigationStrings.PROFILESCREEN}
         component={ProfileScreen}

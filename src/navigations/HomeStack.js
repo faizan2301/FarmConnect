@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import navigationStrings from '../constant/navigationStrings';
 import {HomeScreen, ProductDetailScreen} from '../screens';
 import HeaderComponent from '../components/HeaderComponent';
+import {Text, View} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const HomeStack = () => {
@@ -13,6 +14,7 @@ const HomeStack = () => {
         headerShown: true,
         headerBackVisible: false,
         animation: 'slide_from_right',
+        headerStyle: {backgroundColor: '#99CC99'},
       }}>
       <Stack.Screen
         name={navigationStrings.HOMESCREEN}

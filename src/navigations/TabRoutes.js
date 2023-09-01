@@ -14,6 +14,7 @@ const TabRoutes = () => {
         tabBarActiveTintColor: '#30893b',
         headerShown: false,
         headerBackVisible: false,
+        headerStyle: () => {},
       }}>
       <Tab.Screen
         name={navigationStrings.HOMESTACK}
@@ -21,10 +22,10 @@ const TabRoutes = () => {
         options={({navigation}) => {
           return {
             headerBackVisible: false,
-
             tabBarLabel: 'Home',
+
             tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
+              <MaterialCommunityIcons name="home" color={color} size={30} />
             ),
           };
         }}
@@ -37,11 +38,7 @@ const TabRoutes = () => {
             headerBackVisible: false,
             tabBarLabel: 'Profile',
             tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons
-                name="account"
-                color={color}
-                size={size}
-              />
+              <MaterialCommunityIcons name="account" color={color} size={30} />
             ),
           };
         }}

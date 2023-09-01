@@ -8,6 +8,7 @@ export default [
     sizes: ['Small', 'Medium', 'Large'],
     description:
       'Delicious and juicy apples freshly harvested from the orchard.',
+    location: 'Near Texas',
   },
   {
     id: '2',
@@ -18,6 +19,7 @@ export default [
     sizes: ['Dozen', 'Half Dozen'],
     description:
       'Farm-fresh eggs from free-range chickens raised on organic feed.',
+    location: 'Near Florida',
   },
   {
     id: '3',
@@ -28,6 +30,7 @@ export default [
     sizes: ['Per Pound'],
     description:
       'Colorful and flavorful tomatoes grown using traditional methods.',
+    location: 'Near Chicago',
   },
   {
     id: '4',
@@ -37,6 +40,7 @@ export default [
     price: '$7.99',
     sizes: ['8 oz', '16 oz', '32 oz'],
     description: 'Pure and natural honey harvested from our busy bees.',
+    location: 'Near California',
   },
   {
     id: '5',
@@ -46,6 +50,7 @@ export default [
     price: '$1.49',
     sizes: ['Bunch', 'Bag'],
     description: 'Sweet and crunchy carrots pulled straight from the ground.',
+    location: 'Near Silicon Valley',
   },
   {
     id: '6',
@@ -56,6 +61,7 @@ export default [
     sizes: ['Pint', 'Quart'],
     description:
       'Juicy and vibrant strawberries picked at their peak of ripeness.',
+    location: 'Near Columbia',
   },
   {
     id: '7',
@@ -66,6 +72,7 @@ export default [
     sizes: ['Bunch'],
     description:
       'Nutrient-rich kale grown organically for the health-conscious.',
+    location: 'Near Spring field',
   },
   {
     id: '8',
@@ -75,6 +82,7 @@ export default [
     price: '$6.99',
     sizes: ['4 oz', '8 oz'],
     description: 'Creamy and tangy goat cheese made from our own farms milk.',
+    location: 'Near Nashville ',
   },
   {
     id: '9',
@@ -85,6 +93,7 @@ export default [
     sizes: ['Per Pound'],
     description:
       'Assorted colorful peppers perfect for adding flavor to any dish.',
+    location: 'Near Mississippi ',
   },
   {
     id: '10',
@@ -95,5 +104,6 @@ export default [
     sizes: ['Loaf'],
     description:
       'Freshly baked artisanal bread with a rustic and hearty taste.',
+    location: 'Near Boston',
   },
 ];

@@ -7,10 +7,10 @@ const HeaderComponent = ({navigation, title, isBack}) => {
     navigation.goBack();
   };
   return (
-    <View className="flex-row mr-4 w-full ">
+    <View className="flex-row py-2 w-full ">
       {isBack ? (
         <Pressable onPress={onBack} className="justify-center items-center">
-          <Icon name="angle-left" size={40} color="#1841c7" />
+          <Icon name="angle-left" size={40} color="#fff" />
         </Pressable>
       ) : null}
 
