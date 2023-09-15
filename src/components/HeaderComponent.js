@@ -14,8 +14,8 @@ const HeaderComponent = ({navigation, title, isBack}) => {
         </Pressable>
       ) : null}
 
-      <View className="self-center ml-16">
-        <Text className="text-black text-2xl">{title}</Text>
+      <View className="">
+        <Text className="text-white text-2xl">{title}</Text>
       </View>
 
       {/* <View className="justify-center items-center p-1">

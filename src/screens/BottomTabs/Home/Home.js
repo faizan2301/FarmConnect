@@ -10,13 +10,23 @@ import {
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import product from '../../../common/data/product';
-import Animated from 'react-native-reanimated';
+import Animated, {Easing} from 'react-native-reanimated';
 import navigationStrings from '../../../constant/navigationStrings';
 import EvilIcons from 'react-native-vector-icons/Ionicons';
+import FilterButton from '../../../components/FilterButton';
+import fruits from '../../../common/data/fruits';
+import vegetable from '../../../common/data/vegetable';
+import dairyProducts from '../../../common/data/dairyProducts';
+import spices from '../../../common/data/spices';
+import pulses from '../../../common/data/pulses';
+import seeds from '../../../common/data/seeds';
+import imageConstant from '../../../constant/imageConstant';
 const Home = props => {
+  const [filterOrder, setFilterOrder] = useState('fruits');
   const {navigation} = props;
   const [searchText, setSearchText] = useState();
   const [searchClicked, setSearchClicked] = useState(false);
+  const [productData, setProductData] = useState(fruits);
   const products = product;
   const clearText = () => {
     setSearchText('');
@@ -24,24 +34,31 @@ const Home = props => {
   const navigateToProductDetail = item => {
     navigation.navigate(navigationStrings.PRODUCTDETAILSCREEN, {item: item});
   };
-  const renderItem = ({item}) => {
-    return (
-      <View className="flex-1 flex-col m-2 overflow-hidden p-4  bg-white rounded-xl items-center justify-center shadow-xl shadow-[#99CC99]">
-        <Pressable onPress={() => navigateToProductDetail(item)}>
-          <Animated.Image
-            sharedTransitionTag={`image-${item.id}`}
-            source={{uri: item.image}}
-            style={style.image}
-          />
-        </Pressable>
-        <Pressable onPress={() => {}} className="my-2 items-center">
-          <Text className="text-black text-xl">{item.name}</Text>
-          {/* <Text className="text-black text-xl">Buy</Text> */}
-        </Pressable>
-      </View>
-    );
+  const data = [
+    {title: 'Fruits', key: 'fruits'},
+    {title: 'Vegetables', key: 'vegetables'},
+    {title: 'Dairy Products', key: 'dairyProducts'},
+    {title: 'Spices', key: 'spices'},
+    {title: 'Pulses', key: 'pulses'},
+    {title: 'Seeds', key: 'seeds'},
+  ];
+  const changeProduct = key => {
+    if (key === 'fruits') {
+      setProductData(fruits);
+    } else if (key === 'vegetables') {
+      setProductData(vegetable);
+    } else if (key === 'dairyProducts') {
+      setProductData(dairyProducts);
+    } else if (key === 'spices') {
+      setProductData(spices);
+    } else if (key === 'pulses') {
+      setProductData(pulses);
+    } else if (key === 'seeds') {
+      setProductData(seeds);
+    }
   };
 
+  // Start the animation
   const renderItem2 = ({item}) => {
     console.log(item);
     return (
@@ -51,7 +68,8 @@ const Home = props => {
         <Animated.Image
           sharedTransitionTag={`image-${item.id}`}
           source={{uri: item.image}}
-          className="h-32 w-32"
+          className="h-32 w-32 rounded-xl self"
+          loadingIndicatorSource={imageConstant.loader}
         />
         <View className="flex-col ml-2">
           <Animated.Text
@@ -67,6 +85,16 @@ const Home = props => {
       </Pressable>
     );
   };
+  const renderItem = ({item}) => (
+    <FilterButton
+      title={item.title}
+      onPress={() => {
+        setFilterOrder(item.key);
+        changeProduct(item.key);
+      }}
+      isSelected={filterOrder === item.key}
+    />
+  );
   return (
     <View className="flex-1 bg-[#f4f4fb] px-2 ">
       <View className="border border-black rounded-lg flex-row items-center justify-between px-4 mx-2 mt-4 mb-2">
@@ -89,15 +117,16 @@ const Home = props => {
           </TouchableOpacity>
         ) : null}
       </View>
-      {/* <FlatList
-        data={product}
-        showsVerticalScrollIndicator={false}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        numColumns={2}
-      /> */}
       <FlatList
-        data={products}
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.key}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={style.flatListContent}
+      />
+      <FlatList
+        data={productData}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem2}
         keyExtractor={item => item.id}
@@ -133,7 +162,11 @@ const style = StyleSheet.create({
     aspectRatio: 1,
     borderColor: 'grey',
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 10,
+  },
+  flatListContent: {
+    marginVertical: 10,
+    height: 100,
   },
 });
 export default Home;

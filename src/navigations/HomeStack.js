@@ -14,7 +14,7 @@ const HomeStack = () => {
         headerShown: true,
         headerBackVisible: false,
         animation: 'slide_from_right',
-        headerStyle: {backgroundColor: '#99CC99'},
+        headerStyle: {backgroundColor: '#30893b'},
       }}>
       <Stack.Screen
         name={navigationStrings.HOMESCREEN}
