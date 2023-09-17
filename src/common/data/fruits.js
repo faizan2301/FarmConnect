@@ -32,7 +32,7 @@ export default [
   {
     id: '4',
     image:
-      'https://example.com/fruit4.jpghttps://img.freepik.com/free-photo/grapes-wicker-basket-high-angle-view-grey-plaster_176474-10442.jpg?w=1380&t=st=1694762301~exp=1694762901~hmac=37d2e76739e2980cb228c141af1fcd6db455262c5401d698957c25bebdc02340',
+      'https://img.freepik.com/free-photo/grapes-wicker-basket-high-angle-view-grey-plaster_176474-10442.jpg?w=1380&t=st=1694762301~exp=1694762901~hmac=37d2e76739e2980cb228c141af1fcd6db455262c5401d698957c25bebdc02340',
     name: 'Grapes',
     price: '$1.49',
     sizes: ['Per Pound'],
