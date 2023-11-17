@@ -9,8 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import product from '../../../common/data/product';
-import Animated, {Easing} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import navigationStrings from '../../../constant/navigationStrings';
 import EvilIcons from 'react-native-vector-icons/Ionicons';
 import FilterButton from '../../../components/FilterButton';
@@ -27,7 +26,7 @@ const Home = props => {
   const [searchText, setSearchText] = useState();
   const [searchClicked, setSearchClicked] = useState(false);
   const [productData, setProductData] = useState(fruits);
-  const products = product;
+
   const clearText = () => {
     setSearchText('');
   };
