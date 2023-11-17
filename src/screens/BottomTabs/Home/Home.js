@@ -16,9 +16,7 @@ import FilterButton from '../../../components/FilterButton';
 import fruits from '../../../common/data/fruits';
 import vegetable from '../../../common/data/vegetable';
 import dairyProducts from '../../../common/data/dairyProducts';
-import spices from '../../../common/data/spices';
 import pulses from '../../../common/data/pulses';
-import seeds from '../../../common/data/seeds';
 import imageConstant from '../../../constant/imageConstant';
 const Home = props => {
   const [filterOrder, setFilterOrder] = useState('fruits');
@@ -37,9 +35,9 @@ const Home = props => {
     {title: 'Fruits', key: 'fruits'},
     {title: 'Vegetables', key: 'vegetables'},
     {title: 'Dairy Products', key: 'dairyProducts'},
-    {title: 'Spices', key: 'spices'},
     {title: 'Pulses', key: 'pulses'},
-    {title: 'Seeds', key: 'seeds'},
+    // {title: 'Spices', key: 'spices'},
+    // {title: 'Seeds', key: 'seeds'},
   ];
   const changeProduct = key => {
     if (key === 'fruits') {
@@ -48,13 +46,16 @@ const Home = props => {
       setProductData(vegetable);
     } else if (key === 'dairyProducts') {
       setProductData(dairyProducts);
-    } else if (key === 'spices') {
-      setProductData(spices);
-    } else if (key === 'pulses') {
-      setProductData(pulses);
-    } else if (key === 'seeds') {
-      setProductData(seeds);
     }
+    // else if (key === 'spices') {
+    //   setProductData(spices);
+    // }
+    else if (key === 'pulses') {
+      setProductData(pulses);
+    }
+    // else if (key === 'seeds') {
+    //   setProductData(seeds);
+    // }
   };
 
   // Start the animation
@@ -95,7 +96,7 @@ const Home = props => {
     />
   );
   return (
-    <View className="flex-1 bg-[#f4f4fb] px-2 ">
+    <View className="flex-1 bg-[#f4f4fb] px-2  ">
       <View className="border border-black rounded-lg flex-row items-center justify-between px-4 mx-2 mt-4 mb-2">
         <TouchableOpacity>
           <Icon name="magnify" color="grey" size={30} />
@@ -129,6 +130,7 @@ const Home = props => {
         showsVerticalScrollIndicator={false}
         renderItem={renderItem2}
         keyExtractor={item => item.id}
+        contentContainerStyle={{paddingBottom: 80}}
       />
     </View>
   );
