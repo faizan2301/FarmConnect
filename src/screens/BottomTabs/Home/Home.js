@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
   Pressable,
+  useColorScheme,
 } from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -18,13 +19,15 @@ import vegetable from '../../../common/data/vegetable';
 import dairyProducts from '../../../common/data/dairyProducts';
 import pulses from '../../../common/data/pulses';
 import imageConstant from '../../../constant/imageConstant';
+import {SafeAreaView} from 'react-native-safe-area-context';
 const Home = props => {
   const [filterOrder, setFilterOrder] = useState('fruits');
   const {navigation} = props;
   const [searchText, setSearchText] = useState();
   const [searchClicked, setSearchClicked] = useState(false);
   const [productData, setProductData] = useState(fruits);
-
+  const theme = useColorScheme();
+  const isDarkTheme = theme === 'dark';
   const clearText = () => {
     setSearchText('');
   };
@@ -64,7 +67,7 @@ const Home = props => {
     return (
       <Pressable
         onPress={() => navigateToProductDetail(item)}
-        className="flex-1 flex-row m-2 overflow-hidden p-2  bg-[#F4FBF5] rounded-xl items-center justify-start shadow-xl shadow-[#99CC99]">
+        className="flex-1 flex-row m-2 overflow-hidden p-2  bg-[#F4FBF5] dark:bg-[#1d1c37] rounded-xl items-center justify-start shadow-xl shadow-[#1d1c37]">
         <Animated.Image
           sharedTransitionTag={`image-${item.id}`}
           source={{uri: item.image}}
@@ -73,13 +76,19 @@ const Home = props => {
         />
         <View className="flex-col ml-2">
           <Animated.Text
-            className="text-black text-xl"
+            className="text-black dark:text-white text-xl"
             sharedTransitionTag={`text-${item.id}`}>
             {item.name}
           </Animated.Text>
           <View className="flex-row items-center justify-start">
-            <EvilIcons name="location" color="black" size={24} />
-            <Text className="text-black text-lg">{item.location}</Text>
+            <EvilIcons
+              name="location"
+              color={isDarkTheme ? 'white' : 'black'}
+              size={22}
+            />
+            <Text className="text-black dark:text-white text-lg">
+              {item.location}
+            </Text>
           </View>
         </View>
       </Pressable>
@@ -96,16 +105,62 @@ const Home = props => {
     />
   );
   return (
-    <View className="flex-1 bg-[#f4f4fb] px-2  ">
-      <View className="border border-black rounded-lg flex-row items-center justify-between px-4 mx-2 mt-4 mb-2">
+    <SafeAreaView className="flex-1 bg-[#fcfdfd] dark:bg-[#14142c] px-2  ">
+      {/* <View className="flex-row mx-2 mt-2 items-center justify-between">
+        <View className="flex-row">
+          <Animated.Image
+            source={{
+              uri: 'https://res.cloudinary.com/dxcfomhnp/image/upload/v1690278136/olive/us94s576s7bvbh91lkue.png',
+            }}
+            className="h-12 w-12 "
+          />
+          <View className="flex-col ml-2 ">
+            <Animated.Text className="text-gray-400 text-xs">
+              Welcome back!
+            </Animated.Text>
+            <Animated.Text className="text-black dark:text-white text-lg">
+              Shaikh Faizan
+            </Animated.Text>
+          </View>
+        </View>
+        <View>
+          <Icon name="bell" color="#f49c07" size={26} />
+        </View>
+      </View> */}
+      <View className="flex-row mx-2 mt-2 items-center justify-between">
+        <View className="flex-row items-center">
+          <Animated.Image
+            source={{
+              uri: 'https://res.cloudinary.com/dxcfomhnp/image/upload/v1690278136/olive/us94s576s7bvbh91lkue.png',
+            }}
+            className="h-12 w-12"
+          />
+          <View className="flex-col ml-2">
+            <Animated.Text className="text-gray-400 text-xs">
+              Welcome back!
+            </Animated.Text>
+            <Animated.Text className="text-black dark:text-white text-lg">
+              Shaikh Faizan
+            </Animated.Text>
+          </View>
+        </View>
+
+        <Icon name="bell" color="#f49c07" size={26} />
+      </View>
+      <View className="border bg-#f3f3f3 dark:bg-[#1d1c37] border-black rounded-lg flex-row items-center justify-between px-4 mx-2 mt-6 mb-2">
         <TouchableOpacity>
-          <Icon name="magnify" color="grey" size={30} />
+          <Icon
+            name="magnify"
+            color={isDarkTheme ? '#fff' : '#000'}
+            size={26}
+          />
         </TouchableOpacity>
         <TextInput
           value={searchText}
-          placeholder="Search here..."
+          placeholder="Search here.."
           style={style.input}
-          placeholderTextColor="grey"
+          className="dark:bg-[#1d1c37]"
+          placeholderTextColor="#fff"
           onFocus={() => setSearchClicked(true)}
           onBlur={() => setSearchClicked(false)}
           onChange={setSearchText}
@@ -132,7 +187,7 @@ const Home = props => {
         keyExtractor={item => item.id}
         contentContainerStyle={{paddingBottom: 80}}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -141,7 +196,7 @@ const style = StyleSheet.create({
     height: 50,
     fontSize: 18,
     flex: 1,
-    color: 'black',
+
     flexDirection: 'row',
   },
   itemContainer: {

@@ -11,7 +11,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
         headerBackVisible: false,
         animation: 'slide_from_right',
         headerStyle: {backgroundColor: '#30893b'},

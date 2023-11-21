@@ -32,6 +32,7 @@ const TabRoutes = () => {
           paddingVertical: 15,
           alignContent: 'center',
           alignItems: 'center',
+          borderTopWidth: 0,
         },
       }}>
       <Tab.Screen
@@ -44,6 +45,7 @@ const TabRoutes = () => {
             tabBarIcon: ({color, size}) => (
               <MaterialCommunityIcons name="home" color={color} size={30} />
             ),
+            headerShown: false,
           };
         }}
       />
