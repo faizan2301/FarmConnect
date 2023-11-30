@@ -12,7 +12,6 @@ import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Animated from 'react-native-reanimated';
 import navigationStrings from '../../../constant/navigationStrings';
-import EvilIcons from 'react-native-vector-icons/Ionicons';
 import FilterButton from '../../../components/FilterButton';
 import fruits from '../../../common/data/fruits';
 import vegetable from '../../../common/data/vegetable';
@@ -67,29 +66,25 @@ const Home = props => {
     return (
       <Pressable
         onPress={() => navigateToProductDetail(item)}
-        className="flex-1 flex-row m-2 overflow-hidden p-2  bg-[#F4FBF5] dark:bg-[#1d1c37] rounded-xl items-center justify-start shadow-xl shadow-[#1d1c37]">
+        className="flex-1 flex-col m-2 overflow-hidden p-2  bg-[#F4FBF5] dark:bg-[#1d1c37] rounded-xl  justify-start shadow-xl shadow-[#1d1c37]">
+        <Animated.Text
+          className="text-black dark:text-white text-xl"
+          sharedTransitionTag={`text-${item.id}`}>
+          {item.name}
+        </Animated.Text>
+
+        <Text className="text-gray-400 text-sm">Price per kg</Text>
+        <Text className="text-black dark:text-white text-xl mb-2">
+          {item.price}
+        </Text>
         <Animated.Image
           sharedTransitionTag={`image-${item.id}`}
           source={{uri: item.image}}
-          className="h-32 w-32 rounded-xl self"
+          className="h-32 w-32 rounded-xl self-center"
           loadingIndicatorSource={imageConstant.loader}
         />
-        <View className="flex-col ml-2">
-          <Animated.Text
-            className="text-black dark:text-white text-xl"
-            sharedTransitionTag={`text-${item.id}`}>
-            {item.name}
-          </Animated.Text>
-          <View className="flex-row items-center justify-start">
-            <EvilIcons
-              name="location"
-              color={isDarkTheme ? 'white' : 'black'}
-              size={22}
-            />
-            <Text className="text-black dark:text-white text-lg">
-              {item.location}
-            </Text>
-          </View>
+        <View className="self-end mt-2">
+          <Icon name="cart" color="#f49c07" size={26} />
         </View>
       </Pressable>
     );
@@ -185,6 +180,7 @@ const Home = props => {
         showsVerticalScrollIndicator={false}
         renderItem={renderItem2}
         keyExtractor={item => item.id}
+        numColumns={2}
         contentContainerStyle={{paddingBottom: 80}}
       />
     </SafeAreaView>
@@ -196,33 +192,40 @@ const style = StyleSheet.create({
     height: 50,
     fontSize: 18,
     flex: 1,
-
     flexDirection: 'row',
   },
   itemContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    margin: 10,
-    overflow: 'hidden',
-    padding: 10,
-    backgroundColor: 'white',
-    borderRadius: 8,
-    alignItems: 'center',
-    alignContent: 'center',
-    shadowColor: 'green',
-    borderColor: 'red',
-    borderWidth: 0.5,
+    width: '50%',
+    padding: 1,
   },
   image: {
     width: '100%',
     aspectRatio: 1,
-    borderColor: 'grey',
-    borderWidth: 1,
-    borderRadius: 10,
   },
   flatListContent: {
-    marginVertical: 10,
-    height: 100,
+    marginVertical: 8,
   },
 });
 export default Home;
+
+// itemContainer: {
+//   flex: 1,
+//   flexDirection: 'column',
+//   margin: 10,
+//   overflow: 'hidden',
+//   padding: 10,
+//   backgroundColor: 'white',
+//   borderRadius: 8,
+//   alignItems: 'center',
+//   alignContent: 'center',
+//   shadowColor: 'green',
+//   borderColor: 'red',
+//   borderWidth: 0.5,
+// },
+// image: {
+//   width: '100%',
+//   aspectRatio: 1,
+//   borderColor: 'grey',
+//   borderWidth: 1,
+//   borderRadius: 10,
+// },

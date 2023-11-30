@@ -20,10 +20,10 @@ const FilterButton = ({title, onPress, isSelected}) => {
 const styles = StyleSheet.create({
   button: {
     height: 48,
-    width: 110, // Adjust width as needed
+    // Adjust width as needed
 
     alignItems: 'center',
-
+    marginHorizontal: 12,
     marginVertical: 4,
   },
   text: {
