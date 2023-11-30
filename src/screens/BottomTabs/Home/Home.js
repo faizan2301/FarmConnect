@@ -67,7 +67,7 @@ const Home = props => {
     return (
       <Pressable
         onPress={() => navigateToProductDetail(item)}
-        className="flex-1 flex-col m-2 overflow-hidden p-2  bg-[#F4FBF5] dark:bg-[#1d1c37] rounded-xl  justify-start shadow-xl shadow-[#1d1c37]">
+        className="flex-1 flex-col m-2 overflow-hidden p-2  bg-[#f2f3f2] dark:bg-[#1d1c37] rounded-xl  justify-start shadow-xl ">
         <Animated.Text
           className="text-black dark:text-white text-xl"
           sharedTransitionTag={`text-${item.id}`}>

@@ -17,7 +17,12 @@ const ProductDetailScreen = props => {
     <SafeAreaView className="flex-1 bg-[#14142c] ">
       <View className="bg-[#fcfdfd] flex-1 rounded-b-[26px]">
         <View className="flex-row justify-between items-center m-4">
-          <Icon name="arrow-back-ios" color="#f49c07" size={26} />
+          <Pressable
+            onPress={() => {
+              navigation.goBack();
+            }}>
+            <Icon name="arrow-back-ios" color="#f49c07" size={26} />
+          </Pressable>
           <Icon name="shopping-cart" color="#f49c07" size={26} />
         </View>
         <Animated.Image
