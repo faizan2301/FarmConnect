@@ -8,7 +8,7 @@ import {
   Pressable,
   useColorScheme,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Animated from 'react-native-reanimated';
 import navigationStrings from '../../../constant/navigationStrings';
@@ -41,6 +41,7 @@ const Home = props => {
     // {title: 'Spices', key: 'spices'},
     // {title: 'Seeds', key: 'seeds'},
   ];
+
   const changeProduct = key => {
     if (key === 'fruits') {
       setProductData(fruits);

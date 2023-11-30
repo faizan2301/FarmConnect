@@ -1,7 +1,9 @@
 import {View, Text, StyleSheet, Pressable} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Animated from 'react-native-reanimated';
 import EvilIcons from 'react-native-vector-icons/Ionicons';
+import {SafeAreaView} from 'react-native-safe-area-context';
+
 const ProductDetailScreen = props => {
   const {
     navigation,
@@ -10,8 +12,9 @@ const ProductDetailScreen = props => {
     },
   } = props;
   console.log(item);
+
   return (
-    <View className="flex-1 bg-[#F4FBF5] p-4 ">
+    <SafeAreaView className="flex-1 bg-[#F4FBF5] p-4 ">
       <Animated.Image
         sharedTransitionTag={`image-${item.id}`}
         style={styles.image}
@@ -45,7 +48,7 @@ const ProductDetailScreen = props => {
           <Text className="text-white text-xl mx-auto">Contact</Text>
         </Pressable>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

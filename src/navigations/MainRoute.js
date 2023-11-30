@@ -3,6 +3,7 @@ import React from 'react';
 import navigationStrings from '../constant/navigationStrings';
 import {
   LoginScreen,
+  ProductDetailScreen,
   SignUpScreen,
   SplashScreen,
   VerifyOtpScreen,
@@ -46,6 +47,11 @@ const MainStack = Stack => {
       <Stack.Screen
         name={navigationStrings.BOTTOMTAB}
         component={TabRoutes}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={navigationStrings.PRODUCTDETAILSCREEN}
+        component={ProductDetailScreen}
         options={{headerShown: false}}
       />
     </>
