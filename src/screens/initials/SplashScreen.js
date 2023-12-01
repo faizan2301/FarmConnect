@@ -14,7 +14,7 @@ const SplashScreen = props => {
     }, 5000);
   }, []);
   const navigate = () => {
-    navigation.replace(navigationStrings.BOTTOMTAB);
+    navigation.replace(navigationStrings.LOGINSCREEN);
   };
   return (
     <View className="flex-1 bg-white items-center justify-center p-1">

@@ -31,7 +31,7 @@ const HomeStack = () => {
           };
         }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name={navigationStrings.PRODUCTDETAILSCREEN}
         component={ProductDetailScreen}
         options={({navigation}) => {
@@ -46,7 +46,7 @@ const HomeStack = () => {
             ),
           };
         }}
-      />
+      /> */}
     </Stack.Navigator>
   );
 };

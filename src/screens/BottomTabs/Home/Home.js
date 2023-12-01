@@ -8,11 +8,10 @@ import {
   Pressable,
   useColorScheme,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Animated from 'react-native-reanimated';
 import navigationStrings from '../../../constant/navigationStrings';
-import EvilIcons from 'react-native-vector-icons/Ionicons';
 import FilterButton from '../../../components/FilterButton';
 import fruits from '../../../common/data/fruits';
 import vegetable from '../../../common/data/vegetable';
@@ -42,6 +41,7 @@ const Home = props => {
     // {title: 'Spices', key: 'spices'},
     // {title: 'Seeds', key: 'seeds'},
   ];
+
   const changeProduct = key => {
     if (key === 'fruits') {
       setProductData(fruits);
@@ -67,25 +67,24 @@ const Home = props => {
     return (
       <Pressable
         onPress={() => navigateToProductDetail(item)}
-        className="flex-1 flex-col m-2 overflow-hidden p-2  bg-[#F4FBF5] dark:bg-[#1d1c37] rounded-xl  justify-start shadow-xl shadow-[#1d1c37]">
-        <View className="m-3">
-          <Animated.Text
-            className="text-black dark:text-white text-xl"
-            sharedTransitionTag={`text-${item.id}`}>
-            {item.name}
-          </Animated.Text>
-          <Text className="text-[#ddd] text-sm">Price per kg</Text>
-          <Text className="text-black dark:text-white text-xl">
-            {item.price}
-          </Text>
-        </View>
+        className="flex-1 flex-col m-2 overflow-hidden p-2  bg-[#f2f3f2] dark:bg-[#1d1c37] rounded-xl  justify-start shadow-xl ">
+        <Animated.Text
+          className="text-black dark:text-white text-xl"
+          sharedTransitionTag={`text-${item.id}`}>
+          {item.name}
+        </Animated.Text>
+
+        <Text className="text-gray-400 text-sm">Price per kg</Text>
+        <Text className="text-black dark:text-white text-xl mb-2">
+          {item.price}
+        </Text>
         <Animated.Image
           sharedTransitionTag={`image-${item.id}`}
           source={{uri: item.image}}
           className="h-32 w-32 rounded-xl self-center"
           loadingIndicatorSource={imageConstant.loader}
         />
-        <View className="mt-3 self-end">
+        <View className="self-end mt-2">
           <Icon name="cart" color="#f49c07" size={26} />
         </View>
       </Pressable>
@@ -194,7 +193,6 @@ const style = StyleSheet.create({
     height: 50,
     fontSize: 18,
     flex: 1,
-
     flexDirection: 'row',
   },
   itemContainer: {
@@ -206,11 +204,11 @@ const style = StyleSheet.create({
     aspectRatio: 1,
   },
   flatListContent: {
-    marginVertical: 10,
-    height: 100,
+    marginVertical: 8,
   },
 });
 export default Home;
+
 // itemContainer: {
 //   flex: 1,
 //   flexDirection: 'column',
