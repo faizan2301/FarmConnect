@@ -13,28 +13,26 @@ import imageConstant from '../constant/imageConstant';
 const BackGround = ({children}) => {
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
   return (
-    <ImageBackground
-      source={imageConstant.bgLogin}
-      resizeMode="repeat"
-      style={styles.background}>
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={keyboardVerticalOffset}>
-        <ScrollView
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={{marginHorizontal: 20}}>
-          {/* <Image source={imageConstant.loginLogo} className="h-28  w-24 mt-6 " /> */}
-          <View className="h-12" />
-          <Text className="text-black text-xl mt-12">Welcome!</Text>
-          <Text className="text-black text-3xl mt-6 font-bold">Sign in to</Text>
+    // <ImageBackground
+    //   source={imageConstant.bgLogin}
+    //   resizeMode="repeat"
+    //   style={styles.background}>
 
-          <Text className="text-black text-xl  mb-4">Farm Connect app.</Text>
-
-          {children}
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </ImageBackground>
+    // </ImageBackground>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={keyboardVerticalOffset}>
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{marginHorizontal: 20}}>
+        {/* <Image source={imageConstant.loginLogo} className="h-28  w-24 mt-6 " /> */}
+        <Text className={`text-primaryLightTxtColor text-2xl`}>
+          Farm Konnect
+        </Text>
+        {children}
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

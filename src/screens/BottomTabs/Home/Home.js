@@ -84,9 +84,9 @@ const Home = props => {
           className="h-32 w-32 rounded-xl self-center"
           loadingIndicatorSource={imageConstant.loader}
         />
-        <View className="self-end mt-2">
+        {/* <View className="self-end mt-2">
           <Icon name="cart" color="#f49c07" size={26} />
-        </View>
+        </View> */}
       </Pressable>
     );
   };
