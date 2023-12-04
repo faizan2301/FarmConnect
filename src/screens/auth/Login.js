@@ -5,8 +5,8 @@ import {
   TextInput,
   View,
   Modal,
-  ActivityIndicator,
   Pressable,
+  useColorScheme,
 } from 'react-native';
 import React, {useState, useRef} from 'react';
 import * as Animatable from 'react-native-animatable';
@@ -15,7 +15,14 @@ import BackGround from '../../components/Background';
 import LottieView from 'lottie-react-native';
 import imageConstant from '../../constant/imageConstant';
 import navigationStrings from '../../constant/navigationStrings';
+import {
+  secondaryDarkColor,
+  secondaryLightColor,
+  secondaryTextColor,
+} from '../../constant/colors';
 const Login = props => {
+  const theme = useColorScheme();
+  const isDarkTheme = theme === 'dark';
   const {navigation} = props;
   const [mobileNumber, setMobileNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -72,15 +79,25 @@ const Login = props => {
           </View>
         </View>
       </Modal>
-      <Text className="text-black text-xl mb-2">Mobile number</Text>
+
+      {/* <Text className="text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-xl mb-2 mt-4">
+        Mobile number
+      </Text> */}
       <TextInput
         style={[
           styles.input,
           focusedInput === 'mobile' && styles.inputFocused,
           mobileError && styles.inputError,
+          {
+            backgroundColor: isDarkTheme
+              ? secondaryDarkColor
+              : secondaryLightColor,
+            marginVertical: 20,
+          },
         ]}
         placeholder="Mobile Number"
         keyboardType="numeric"
+        placeholderTextColor={secondaryTextColor}
         maxLength={10}
         value={mobileNumber}
         onFocus={() => setFocusedInput('mobile')}
@@ -91,17 +108,26 @@ const Login = props => {
         }}
       />
       {mobileError ? <Text style={styles.errorText}>{mobileError}</Text> : null}
-      <Text className="text-black text-xl my-2">Password</Text>
+      {/* <Text className="text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-xl my-2">
+        Password
+      </Text> */}
       <View
         style={[
           styles.input,
           focusedInput === 'password' && styles.inputFocused,
           passwordError && styles.inputError,
+          {
+            backgroundColor: isDarkTheme
+              ? secondaryDarkColor
+              : secondaryLightColor,
+            marginVertical: 20,
+          },
         ]}>
         <TextInput
           style={styles.password}
           placeholder="Password"
           secureTextEntry={!showPassword}
+          placeholderTextColor={secondaryTextColor}
           value={password}
           onFocus={() => setFocusedInput('password')}
           onBlur={() => setFocusedInput('')}
@@ -126,13 +152,17 @@ const Login = props => {
       <Animatable.View ref={bounceAniref}>
         <TouchableOpacity
           onPress={onLogin}
-          className="w-full bg-[#30893b] p-4 mt-6 rounded-lg items-center justify-center">
-          <Text className="text-[#fff] text-xl">Login</Text>
+          className="w-full bg-buttonColor p-4 mt-6 rounded-lg items-center justify-center">
+          <Text className="text-white text-xl">Login</Text>
         </TouchableOpacity>
       </Animatable.View>
-      <Text className="text-black text-lg self-center items-center justify-center-center mt-4">
-        Don't have an account?{' '}
-        <Text onPress={onPress} className="text-[#30893b] font-bold">
+      <Text
+        className={`text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-lg self-center my-12 underline`}>
+        Forgot password
+      </Text>
+      <Text className="text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-lg self-center items-center justify-center-center mt-4">
+        Don't have an account?{'  '}
+        <Text onPress={onPress} className="text-buttonColor  font-bold">
           Register
         </Text>
       </Text>
@@ -153,16 +183,14 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     fontSize: 18,
-    borderColor: 'black',
-    borderWidth: 2,
+
     marginBottom: 10,
     paddingHorizontal: 10,
-    color: 'black',
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderRadius: 8,
   },
-  password: {color: 'black', flex: 1, fontSize: 18},
+  password: {flex: 1, fontSize: 18},
   inputFocused: {
     borderColor: '#30893b', // Change to your desired color
   },
