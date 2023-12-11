@@ -21,41 +21,74 @@ import {
   secondaryLightColor,
   secondaryTextColor,
 } from '../../constant/colors';
+import {useLoginApiMutation} from '../../redux/api/api';
+import {errorMessage, handleResponse} from '../../common/functions';
+import {saveCredentials} from '../../common/AsyncStorageFunctions';
+import {useDispatch} from 'react-redux';
+import {saveToken} from '../../redux/slice/tokenSlice';
+import {saveUserData} from '../../redux/slice/authSlice';
 const Login = props => {
   const theme = useColorScheme();
   const isDarkTheme = theme === 'dark';
   const {navigation} = props;
-  const [mobileNumber, setMobileNumber] = useState('');
+  // const [mobileNumber, setMobileNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [mobileError, setMobileError] = useState('');
+  // const [mobileError, setMobileError] = useState('');
+
+  const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [focusedInput, setFocusedInput] = useState('');
-  const [modalVal, setModalVal] = useState(false);
+  const [loginApi, {isError, isLoading, error, data}] = useLoginApiMutation();
+  const dispatch = useDispatch();
   const bounceAniref = useRef();
   const onPress = () => {
     navigation.push(navigationStrings.SIGNUPSCREEN);
   };
   const onLogin = () => {
     // Validate mobile number
-    if (!/^\d{10}$/.test(mobileNumber)) {
-      setMobileError('Please enter a valid 10-digit mobile number');
+    // if (!/^\d{10}$/.test(mobileNumber)) {
+    //   setMobileError('Please enter a valid 10-digit mobile number');
+    //   animate();
+    //   return;
+    // }
+    if (!/^[A-Za-z\d._-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+      setEmailError('Please enter a valid email');
       animate();
       return;
+    } else {
+      setEmailError('');
     }
-
     // Validate password
     if (password.length < 4) {
       setPasswordError('Password must be at least 4 characters long');
       animate();
       return;
+    } else {
+      setPasswordError('');
     }
-    setModalVal(true);
-    const interval = setInterval(() => {
-      clearInterval(interval);
-      setModalVal(false);
+    login();
+  };
+  const login = async () => {
+    var body = {
+      email,
+      password,
+    };
+    var response = await loginApi(body);
+    handleResponse(response, false, res => {
+      saveCredentialsAndLogin(res);
+    });
+  };
+  const saveCredentialsAndLogin = async credentials => {
+    var isSaved = await saveCredentials(credentials);
+    dispatch(saveToken(credentials.access_token));
+    dispatch(saveUserData(credentials.user));
+    if (isSaved) {
       navigation.replace(navigationStrings.BOTTOMTAB);
-    }, 5000);
+    } else {
+      errorMessage();
+    }
   };
   const animate = () => {
     bounceAniref.current.shake(800);
@@ -65,7 +98,7 @@ const Login = props => {
       <Modal
         transparent={true}
         animationType={'none'}
-        visible={modalVal}
+        visible={isLoading}
         style={{zIndex: 1100}}
         onRequestClose={() => {}}>
         <View style={styles.modalBackground}>
@@ -84,7 +117,7 @@ const Login = props => {
       {/* <Text className="text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-xl mb-2 mt-4">
         Mobile number
       </Text> */}
-      <TextInput
+      {/* <TextInput
         style={[
           styles.input,
           focusedInput === 'mobile' && styles.inputFocused,
@@ -108,10 +141,34 @@ const Login = props => {
           setMobileError('');
         }}
       />
-      {mobileError ? <Text style={styles.errorText}>{mobileError}</Text> : null}
+      {mobileError ? <Text style={styles.errorText}>{mobileError}</Text> : null} */}
       {/* <Text className="text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-xl my-2">
         Password
       </Text> */}
+      <TextInput
+        style={[
+          styles.input,
+          focusedInput === 'email' && styles.inputFocused,
+          emailError && styles.inputError,
+          {
+            backgroundColor: isDarkTheme
+              ? secondaryDarkColor
+              : secondaryLightColor,
+            marginVertical: 20,
+          },
+        ]}
+        placeholder="Email"
+        keyboardType="email-address"
+        placeholderTextColor={secondaryTextColor}
+        value={email}
+        onFocus={() => setFocusedInput('email')}
+        onBlur={() => setFocusedInput('')}
+        onChangeText={text => {
+          setEmail(text);
+          setEmailError('');
+        }}
+      />
+      {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
       <View
         style={[
           styles.input,
@@ -151,11 +208,11 @@ const Login = props => {
         <Text style={styles.errorText}>{passwordError}</Text>
       ) : null}
       <Animatable.View ref={bounceAniref}>
-        <TouchableOpacity
+        <Pressable
           onPress={onLogin}
           className="w-full bg-buttonColor p-4 mt-6 rounded-lg items-center justify-center">
           <Text className="text-white text-xl">Login</Text>
-        </TouchableOpacity>
+        </Pressable>
       </Animatable.View>
       <Text
         className={`text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-lg self-center my-12 underline`}>

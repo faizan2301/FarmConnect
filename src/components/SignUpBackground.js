@@ -24,7 +24,9 @@ const BackGround = ({children}) => {
       keyboardVerticalOffset={keyboardVerticalOffset}>
       <ScrollView
         keyboardShouldPersistTaps="always"
-        contentContainerStyle={{marginHorizontal: 20}}>
+        keyboardDismissMode="interactive"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollViewContainer}>
         {/* <Image source={imageConstant.loginLogo} className="h-28  w-24 mt-6 " /> */}
         <View className="self-center ">
           <View className="flex-row items-center justify-center h-44 ">
@@ -50,5 +52,9 @@ const styles = StyleSheet.create({
   linearGradient: {flex: 1},
   container: {
     flex: 1,
+  },
+  scrollViewContainer: {
+    flexGrow: 1,
+    marginHorizontal: 20,
   },
 });

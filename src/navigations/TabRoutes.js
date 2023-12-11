@@ -29,7 +29,7 @@ const TabRoutes = () => {
           backgroundColor: '#15142c',
           borderRadius: 15,
           height: 60,
-          paddingVertical: 15,
+
           alignContent: 'center',
           alignItems: 'center',
           borderTopWidth: 0,

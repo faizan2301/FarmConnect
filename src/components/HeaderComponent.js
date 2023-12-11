@@ -9,13 +9,15 @@ const HeaderComponent = ({navigation, title, isBack}) => {
   return (
     <View className="flex-row py-2 w-full ">
       {isBack ? (
-        <Pressable onPress={onBack} className="justify-center items-center">
+        <Pressable
+          onPress={onBack}
+          className="justify-center items-center self-center">
           <Icon name="angle-left" size={40} color="#fff" />
         </Pressable>
       ) : null}
 
       <View className="">
-        <Text className="text-white text-2xl">{title}</Text>
+        <Text className="text-white text-2xl ml-1">{title}</Text>
       </View>
 
       {/* <View className="justify-center items-center p-1">

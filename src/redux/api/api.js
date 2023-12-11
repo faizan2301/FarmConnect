@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-const baseUrl = 'http://192.168.1.23:3500';
+const baseUrl = 'http://192.168.1.5:3500';
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
@@ -21,7 +21,7 @@ export const api = createApi({
       query: args => {
         console.log('signUp', args);
         return {
-          url: 'login',
+          url: 'signup',
           method: 'POST',
           body: args,
           headers: {

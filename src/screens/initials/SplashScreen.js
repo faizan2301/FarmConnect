@@ -4,18 +4,35 @@ import React, {useEffect} from 'react';
 import LottieView from 'lottie-react-native';
 import imageConstant from '../../constant/imageConstant';
 import navigationStrings from '../../constant/navigationStrings';
+import {getCredentials, getToken} from '../../common/AsyncStorageFunctions';
+import {useDispatch} from 'react-redux';
+import {saveToken} from '../../redux/slice/tokenSlice';
+import {saveUserData} from '../../redux/slice/authSlice';
 
 const SplashScreen = props => {
   const {navigation} = props;
+  const dispatch = useDispatch();
   useEffect(() => {
     const interval = setInterval(() => {
       clearInterval(interval);
-      navigate();
+      // navigate();
+      checkCredentials();
     }, 5000);
   }, []);
-  const navigate = () => {
-    navigation.replace(navigationStrings.LOGINSCREEN);
+  const checkCredentials = async () => {
+    var token = await getToken();
+    var credentials = await getCredentials();
+    if (token) {
+      dispatch(saveToken(token));
+      dispatch(saveUserData(credentials));
+      navigation.replace(navigationStrings.BOTTOMTAB);
+    } else {
+      navigation.replace(navigationStrings.LOGINSCREEN);
+    }
   };
+  // const navigate = () => {
+  //   navigation.replace(navigationStrings.LOGINSCREEN);
+  // };
   return (
     <View className="flex-1 bg-white items-center justify-center p-1">
       <LottieView

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   Pressable,
   Text,
@@ -20,6 +21,11 @@ import {
   secondaryLightColor,
   secondaryTextColor,
 } from '../../constant/colors';
+import {useSignUpApiMutation} from '../../redux/api/api';
+import {showMessage} from 'react-native-flash-message';
+import {someThingWentWrong} from '../../constant/strings';
+import {handleResponse} from '../../common/functions';
+
 const SignUp = props => {
   const theme = useColorScheme();
   const isDarkTheme = theme === 'dark';
@@ -35,6 +41,7 @@ const SignUp = props => {
   const [passwordError, setPasswordError] = useState('');
   const [focusedInput, setFocusedInput] = useState('');
   const [modalVal, setModalVal] = useState(false);
+  const [sinupApi, {error, data, isLoading, isError}] = useSignUpApiMutation();
   const bounceAniref = useRef();
   const onLogin = () => {
     // Validate mobile number
@@ -61,20 +68,42 @@ const SignUp = props => {
       setMobileError('');
     }
 
-    if (password.length < 4) {
+    if (password.length < 6) {
       // Validate password
-      setPasswordError('Password must be at least 4 characters long');
+      setPasswordError('Password must be at least 6 characters long');
       animate();
       return;
     } else {
       setPasswordError('');
     }
     setModalVal(true);
-    const interval = setInterval(() => {
-      clearInterval(interval);
-      setModalVal(false);
-      navigation.push(navigationStrings.VERIFYOTPSCREEN);
-    }, 5000);
+    signup();
+    // const interval = setInterval(() => {
+    //   clearInterval(interval);
+    //   setModalVal(false);
+    //   navigation.push(navigationStrings.VERIFYOTPSCREEN);
+    // }, 5000);
+  };
+  const signup = async () => {
+    try {
+      var body = {
+        fullName: name,
+        email,
+        password,
+        mobileNo: mobileNumber,
+      };
+      var response = await sinupApi(body);
+
+      handleResponse(response, true, () => {
+        navigation.goBack();
+      });
+    } catch (e) {
+      console.log('Catch error', e);
+      showMessage({
+        message: `${someThingWentWrong} +${e}`,
+        type: 'danger',
+      });
+    }
   };
   const animate = () => {
     bounceAniref.current.shake(800);
@@ -84,7 +113,7 @@ const SignUp = props => {
       <Modal
         transparent={true}
         animationType={'none'}
-        visible={modalVal}
+        visible={isLoading}
         style={{zIndex: 1100}}
         onRequestClose={() => {}}>
         <View style={styles.modalBackground}>
@@ -214,13 +243,18 @@ const SignUp = props => {
       {passwordError ? (
         <Text style={styles.errorText}>{passwordError}</Text>
       ) : null}
-      <Animatable.View ref={bounceAniref}>
+      {/* <Animatable.View ref={bounceAniref}>
         <Pressable
           onPress={onLogin}
           className="w-full bg-buttonColor p-4 mt-6 rounded-2xl items-center justify-center">
           <Text className="text-[#fff] text-xl">Register</Text>
         </Pressable>
-      </Animatable.View>
+      </Animatable.View> */}
+      <Pressable
+        onPress={onLogin}
+        className="w-full bg-buttonColor p-4 mt-6  rounded-2xl items-center justify-center">
+        <Text className="text-[#fff] text-xl">Register</Text>
+      </Pressable>
     </BackGround>
   );
 };

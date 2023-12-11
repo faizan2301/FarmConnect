@@ -19,6 +19,13 @@ import dairyProducts from '../../../common/data/dairyProducts';
 import pulses from '../../../common/data/pulses';
 import imageConstant from '../../../constant/imageConstant';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {
+  dairyIconBg,
+  fruitsIconBg,
+  pulsesIconBg,
+  secondaryTextColor,
+  vegieIconBg,
+} from '../../../constant/colors';
 const Home = props => {
   const [filterOrder, setFilterOrder] = useState('fruits');
   const {navigation} = props;
@@ -34,10 +41,30 @@ const Home = props => {
     navigation.navigate(navigationStrings.PRODUCTDETAILSCREEN, {item: item});
   };
   const data = [
-    {title: 'Fruits', key: 'fruits'},
-    {title: 'Vegetables', key: 'vegetables'},
-    {title: 'Dairy Products', key: 'dairyProducts'},
-    {title: 'Pulses', key: 'pulses'},
+    {
+      title: 'Fruits',
+      key: 'fruits',
+      color: fruitsIconBg,
+      icon: imageConstant.grape,
+    },
+    {
+      title: 'Vegie',
+      key: 'vegetables',
+      color: vegieIconBg,
+      icon: imageConstant.borcolli,
+    },
+    {
+      title: 'Dairy',
+      key: 'dairyProducts',
+      color: dairyIconBg,
+      icon: imageConstant.cheese,
+    },
+    {
+      title: 'Pulses',
+      key: 'pulses',
+      color: pulsesIconBg,
+      icon: imageConstant.lentil,
+    },
     // {title: 'Spices', key: 'spices'},
     // {title: 'Seeds', key: 'seeds'},
   ];
@@ -92,7 +119,7 @@ const Home = props => {
   };
   const renderItem = ({item}) => (
     <FilterButton
-      title={item.title}
+      item={item}
       onPress={() => {
         setFilterOrder(item.key);
         changeProduct(item.key);
@@ -143,7 +170,7 @@ const Home = props => {
 
         <Icon name="bell" color="#f49c07" size={26} />
       </View>
-      <View className="border bg-#f3f3f3 dark:bg-[#1d1c37] border-black rounded-lg flex-row items-center justify-between px-4 mx-2 mt-6 mb-2">
+      <View className=" bg-secondaryLightColor dark:bg-secondaryDarkColor  rounded-xl flex-row items-center justify-between px-4 mx-2 mt-6 mb-2">
         <TouchableOpacity>
           <Icon
             name="magnify"
@@ -155,8 +182,7 @@ const Home = props => {
           value={searchText}
           placeholder="Search here.."
           style={style.input}
-          className="dark:bg-[#1d1c37]"
-          placeholderTextColor="#fff"
+          placeholderTextColor={secondaryTextColor}
           onFocus={() => setSearchClicked(true)}
           onBlur={() => setSearchClicked(false)}
           onChange={setSearchText}

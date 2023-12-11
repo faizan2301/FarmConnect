@@ -7,3 +7,7 @@ export const primaryDarkTxtColor = '#fff';
 export const secondaryTextColor = '#A9A7BB';
 export const secondaryLightColor = '#f2f3f2';
 export const secondaryDarkColor = '#1d1d36';
+export const fruitsIconBg = '#FEE2FF';
+export const vegieIconBg = '#E5FCE3';
+export const dairyIconBg = '#FEFFE2';
+export const pulsesIconBg = '#FFEEEA';

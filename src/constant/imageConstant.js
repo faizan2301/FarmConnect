@@ -5,4 +5,9 @@ export default {
   splash: require('../assets/lottie/farm.json'),
   loadingAnimation: require('../assets/lottie/loadingAnimation.json'),
   loader: require('../assets/gif/loader.gif'),
+  farmLogo: require('../assets/images/LogoFarm.png'),
+  borcolli: require('../assets/images/broccoli.png'),
+  cheese: require('../assets/images/cheese.png'),
+  grape: require('../assets/images/grape.jpg'),
+  lentil: require('../assets/images/lentil.png'),
 };

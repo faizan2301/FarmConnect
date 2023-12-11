@@ -1,9 +1,16 @@
 'use strict';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  credentialsKey,
+  tokenKey,
+  firebaseTokenKey,
+  refreshTokenKey,
+} from '../constant/strings';
 export const saveCredentials = async value => {
   try {
-    const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem('credentials', jsonValue);
+    await saveTokentoAsync(value.access_token);
+    const jsonValue = JSON.stringify(value.user);
+    await AsyncStorage.setItem(credentialsKey, jsonValue);
     return true;
   } catch (e) {
     console.log(e.toString());
@@ -12,7 +19,16 @@ export const saveCredentials = async value => {
 };
 export const saveTokentoAsync = async token => {
   try {
-    await AsyncStorage.setItem('token', token);
+    await AsyncStorage.setItem(tokenKey, token);
+    return true;
+  } catch (e) {
+    console.log(e.toString());
+    return false;
+  }
+};
+export const saveRefreshTokentoAsync = async token => {
+  try {
+    await AsyncStorage.setItem(refreshTokenKey, token);
     return true;
   } catch (e) {
     console.log(e.toString());
@@ -22,7 +38,7 @@ export const saveTokentoAsync = async token => {
 
 export const getCredentials = async () => {
   try {
-    const value = await AsyncStorage.getItem('credentials');
+    const value = await AsyncStorage.getItem(credentialsKey);
     if (value != null) {
       return JSON.parse(value);
     } else {
@@ -35,7 +51,7 @@ export const getCredentials = async () => {
 };
 export const getToken = async () => {
   try {
-    const value = await AsyncStorage.getItem('token');
+    const value = await AsyncStorage.getItem(tokenKey);
     if (value != null) {
       return value;
     } else {
@@ -49,7 +65,7 @@ export const getToken = async () => {
 
 export const saveFirebaseToken = async token => {
   try {
-    await AsyncStorage.setItem('firebase_token', token);
+    await AsyncStorage.setItem(firebaseTokenKey, token);
     return true;
   } catch (e) {
     console.log(e.toString());
@@ -58,7 +74,7 @@ export const saveFirebaseToken = async token => {
 };
 export const getFirebaseToken = async () => {
   try {
-    const value = await AsyncStorage.getItem('firebase_token');
+    const value = await AsyncStorage.getItem(firebaseTokenKey);
     if (value != null) {
       return value;
     } else {
