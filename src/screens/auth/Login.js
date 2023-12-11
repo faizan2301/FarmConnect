@@ -16,6 +16,7 @@ import LottieView from 'lottie-react-native';
 import imageConstant from '../../constant/imageConstant';
 import navigationStrings from '../../constant/navigationStrings';
 import {
+  secondaryButtonColor,
   secondaryDarkColor,
   secondaryLightColor,
   secondaryTextColor,
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
   },
   password: {flex: 1, fontSize: 18},
   inputFocused: {
-    borderColor: '#30893b', // Change to your desired color
+    borderColor: secondaryButtonColor, // Change to your desired color
   },
   inputError: {
     borderColor: 'red',

@@ -1,10 +1,11 @@
 import {
-  TouchableOpacity,
+  Pressable,
   Text,
   StyleSheet,
   TextInput,
   View,
   Modal,
+  useColorScheme,
 } from 'react-native';
 import React, {useState, useRef} from 'react';
 import * as Animatable from 'react-native-animatable';
@@ -13,8 +14,15 @@ import BackGround from '../../components/SignUpBackground';
 import LottieView from 'lottie-react-native';
 import imageConstant from '../../constant/imageConstant';
 import navigationStrings from '../../constant/navigationStrings';
-
+import {
+  secondaryButtonColor,
+  secondaryDarkColor,
+  secondaryLightColor,
+  secondaryTextColor,
+} from '../../constant/colors';
 const SignUp = props => {
+  const theme = useColorScheme();
+  const isDarkTheme = theme === 'dark';
   const {navigation} = props;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -91,15 +99,22 @@ const SignUp = props => {
           </View>
         </View>
       </Modal>
-      <Text className="text-black text-xl mb-2">Name</Text>
+      {/* <Text className="text-black text-xl mb-2">Name</Text> */}
       <TextInput
         style={[
           styles.input,
           focusedInput === 'name' && styles.inputFocused,
           nameError && styles.inputError,
+          {
+            backgroundColor: isDarkTheme
+              ? secondaryDarkColor
+              : secondaryLightColor,
+            marginVertical: 20,
+          },
         ]}
         placeholder="Name"
         keyboardType="ascii-capable"
+        placeholderTextColor={secondaryTextColor}
         value={name}
         onFocus={() => setFocusedInput('name')}
         onBlur={() => setFocusedInput('')}
@@ -109,15 +124,22 @@ const SignUp = props => {
         }}
       />
       {nameError ? <Text style={styles.errorText}>{nameError}</Text> : null}
-      <Text className="text-black text-xl mb-2">Email</Text>
+      {/* <Text className="text-black text-xl mb-2">Email</Text> */}
       <TextInput
         style={[
           styles.input,
           focusedInput === 'email' && styles.inputFocused,
           emailError && styles.inputError,
+          {
+            backgroundColor: isDarkTheme
+              ? secondaryDarkColor
+              : secondaryLightColor,
+            marginVertical: 20,
+          },
         ]}
         placeholder="Email"
         keyboardType="email-address"
+        placeholderTextColor={secondaryTextColor}
         value={email}
         onFocus={() => setFocusedInput('email')}
         onBlur={() => setFocusedInput('')}
@@ -127,15 +149,22 @@ const SignUp = props => {
         }}
       />
       {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
-      <Text className="text-black text-xl mb-2">Mobile number</Text>
+      {/* <Text className="text-black text-xl mb-2">Mobile number</Text> */}
       <TextInput
         style={[
           styles.input,
           focusedInput === 'mobile' && styles.inputFocused,
           mobileError && styles.inputError,
+          {
+            backgroundColor: isDarkTheme
+              ? secondaryDarkColor
+              : secondaryLightColor,
+            marginVertical: 20,
+          },
         ]}
         placeholder="Mobile Number"
         keyboardType="numeric"
+        placeholderTextColor={secondaryTextColor}
         maxLength={10}
         value={mobileNumber}
         onFocus={() => setFocusedInput('mobile')}
@@ -146,16 +175,23 @@ const SignUp = props => {
         }}
       />
       {mobileError ? <Text style={styles.errorText}>{mobileError}</Text> : null}
-      <Text className="text-black text-xl my-2">Password</Text>
+      {/* <Text className="text-black text-xl my-2">Password</Text> */}
       <View
         style={[
           styles.input,
           focusedInput === 'password' && styles.inputFocused,
           passwordError && styles.inputError,
+          {
+            backgroundColor: isDarkTheme
+              ? secondaryDarkColor
+              : secondaryLightColor,
+            marginVertical: 20,
+          },
         ]}>
         <TextInput
           style={styles.password}
           placeholder="Password"
+          placeholderTextColor={secondaryTextColor}
           secureTextEntry={!showPassword}
           value={password}
           onFocus={() => setFocusedInput('password')}
@@ -165,7 +201,7 @@ const SignUp = props => {
             setPasswordError('');
           }}
         />
-        <TouchableOpacity
+        <Pressable
           onPress={() => setShowPassword(!showPassword)}
           className="self-center">
           <MaterialIcons
@@ -173,17 +209,17 @@ const SignUp = props => {
             size={24}
             color="gray"
           />
-        </TouchableOpacity>
+        </Pressable>
       </View>
       {passwordError ? (
         <Text style={styles.errorText}>{passwordError}</Text>
       ) : null}
       <Animatable.View ref={bounceAniref}>
-        <TouchableOpacity
+        <Pressable
           onPress={onLogin}
-          className="w-full bg-[#30893b] p-4 mt-6 rounded-lg items-center justify-center">
+          className="w-full bg-buttonColor p-4 mt-6 rounded-2xl items-center justify-center">
           <Text className="text-[#fff] text-xl">Register</Text>
-        </TouchableOpacity>
+        </Pressable>
       </Animatable.View>
     </BackGround>
   );
@@ -202,18 +238,15 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     fontSize: 18,
-    borderColor: 'black',
-    borderWidth: 2,
     marginBottom: 10,
     paddingHorizontal: 10,
-    color: 'black',
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderRadius: 8,
   },
   password: {color: 'black', flex: 1, fontSize: 18},
   inputFocused: {
-    borderColor: '#30893b', // Change to your desired color
+    borderColor: secondaryButtonColor, // Change to your desired color
   },
   inputError: {
     borderColor: 'red',
