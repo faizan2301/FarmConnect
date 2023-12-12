@@ -8,6 +8,7 @@ const FilterButton = ({item, onPress, isSelected}) => {
       onPress={onPress}
       style={{
         // Adjust width as needed
+        height: 90,
         flexDirection: 'column',
         alignItems: 'center',
         marginHorizontal: 12,
@@ -19,9 +20,7 @@ const FilterButton = ({item, onPress, isSelected}) => {
         borderWidth: 1,
       }}>
       <Image source={item.icon} className={`h-10 w-10`} />
-      <Text
-        className="text-secondaryTextColor text-sm mt-2 "
-        style={[styles.text]}>
+      <Text className="text-secondaryTextColor text-sm  " style={[styles.text]}>
         {item.title}
       </Text>
     </Pressable>

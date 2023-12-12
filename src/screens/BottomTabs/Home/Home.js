@@ -91,30 +91,54 @@ const Home = props => {
   // Start the animation
   const renderItem2 = ({item}) => {
     console.log(item);
+
     return (
       <Pressable
         onPress={() => navigateToProductDetail(item)}
-        className="flex-1 flex-col m-2 overflow-hidden p-2  bg-[#f2f3f2] dark:bg-[#1d1c37] rounded-xl  justify-start shadow-xl ">
-        <Animated.Text
-          className="text-black dark:text-white text-xl"
-          sharedTransitionTag={`text-${item.id}`}>
-          {item.name}
-        </Animated.Text>
-
-        <Text className="text-gray-400 text-sm">Price per kg</Text>
-        <Text className="text-black dark:text-white text-xl mb-2">
-          {item.price}
-        </Text>
+        className="flex-1 flex-row mx-2 mb-2 overflow-hidden p-4  bg-secondaryLightColor dark:bg-[#1d1c37] rounded-xl  justify-start items-center shadow-xl ">
         <Animated.Image
           sharedTransitionTag={`image-${item.id}`}
           source={{uri: item.image}}
-          className="h-32 w-32 rounded-xl self-center"
+          className="h-28 w-28 rounded-xl self-center"
           loadingIndicatorSource={imageConstant.loader}
         />
-        {/* <View className="self-end mt-2">
-          <Icon name="cart" color="#f49c07" size={26} />
-        </View> */}
+        <View className={`flex-col mx-4`}>
+          <Animated.Text
+            className="text-black dark:text-white text-xl"
+            sharedTransitionTag={`text-${item.id}`}>
+            {item.name}
+          </Animated.Text>
+          <Text className="text-secondaryTextColor text-sm">Price per kg</Text>
+
+          <Text className="text-black dark:text-white text-xl mb-2">
+            {item.price}
+          </Text>
+        </View>
       </Pressable>
+
+      // <Pressable
+      //   onPress={() => navigateToProductDetail(item)}
+      //   className="flex-1 flex-col m-2 overflow-hidden p-2  bg-secondaryLightColor dark:bg-[#1d1c37] rounded-xl  justify-start shadow-xl ">
+      //   <Animated.Text
+      //     className="text-black dark:text-white text-xl"
+      //     sharedTransitionTag={`text-${item.id}`}>
+      //     {item.name}
+      //   </Animated.Text>
+
+      //   <Text className="text-secondaryTextColor text-sm">Price per kg</Text>
+      //   <Text className="text-black dark:text-white text-xl mb-2">
+      //     {item.price}
+      //   </Text>
+      //   <Animated.Image
+      //     sharedTransitionTag={`image-${item.id}`}
+      //     source={{uri: item.image}}
+      //     className="h-32 w-32 rounded-xl self-center"
+      //     loadingIndicatorSource={imageConstant.loader}
+      //   />
+      //   {/* <View className="self-end mt-2">
+      //     <Icon name="cart" color="#f49c07" size={26} />
+      //   </View> */}
+      // </Pressable>
     );
   };
   const renderItem = ({item}) => (
@@ -128,7 +152,7 @@ const Home = props => {
     />
   );
   return (
-    <SafeAreaView className="flex-1 bg-[#fcfdfd] dark:bg-[#14142c] px-2  ">
+    <SafeAreaView className="flex-1 bg-white dark:bg-primaryDarkColor px-2  ">
       {/* <View className="flex-row mx-2 mt-2 items-center justify-between">
         <View className="flex-row">
           <Animated.Image
@@ -195,6 +219,7 @@ const Home = props => {
           </TouchableOpacity>
         ) : null}
       </View>
+
       <FlatList
         data={data}
         renderItem={renderItem}
@@ -203,12 +228,13 @@ const Home = props => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={style.flatListContent}
       />
+      <View className={`h-2`} />
       <FlatList
         data={productData}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem2}
         keyExtractor={item => item.id}
-        numColumns={2}
+        // numColumns={2}
         contentContainerStyle={{paddingBottom: 80}}
       />
     </SafeAreaView>
@@ -223,7 +249,6 @@ const style = StyleSheet.create({
     flexDirection: 'row',
   },
   itemContainer: {
-    width: '50%',
     padding: 1,
   },
   image: {
@@ -231,7 +256,8 @@ const style = StyleSheet.create({
     aspectRatio: 1,
   },
   flatListContent: {
-    marginVertical: 8,
+    marginVertical: 6,
+    height: 130,
   },
 });
 export default Home;

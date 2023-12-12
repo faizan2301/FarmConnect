@@ -11,3 +11,4 @@ export const fruitsIconBg = '#FEE2FF';
 export const vegieIconBg = '#E5FCE3';
 export const dairyIconBg = '#FEFFE2';
 export const pulsesIconBg = '#FFEEEA';
+export const iconColor = '#212121';

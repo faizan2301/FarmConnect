@@ -6,15 +6,17 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
-      primaryLightColor: '#F2F2F2',
+      primaryLightColor: '#fcfdfd',
       primaryDarkColor: '#14152c',
       buttonColor: '#00B761',
+      lightButtonColor: '#E5FCE3',
       secondaryButtonColor: '#f49c07',
       primaryLightTxtColor: '#000',
       primaryDarkTxtColor: '#fff',
       secondaryTextColor: '#A9A7BB',
       secondaryLightColor: '#f2f3f2',
       secondaryDarkColor: '#1d1d36',
+      iconColor: '#212121',
       black: colors.black,
       white: colors.white,
       gray: colors.gray,

@@ -5,34 +5,37 @@ import navigationStrings from '../constant/navigationStrings';
 import HomeStack from './HomeStack';
 import ProfileStack from './ProfileStack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Platform, View} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Text, View, useColorScheme} from 'react-native';
+import {buttonColor, secondaryTextColor} from '../constant/colors';
 const Tab = createBottomTabNavigator();
 const TabRoutes = () => {
+  const theme = useColorScheme();
+  const isDarkTheme = theme === 'dark';
   return (
     <Tab.Navigator
       initialRouteName={navigationStrings.HOMESTACK}
       screenOptions={{
-        tabBarActiveTintColor: '#f59c06',
+        tabBarActiveTintColor: buttonColor,
         headerShown: false,
         headerBackVisible: false,
         headerStyle: () => {},
         tabBarHideOnKeyboard: true,
         tabBarShowLabel: false,
-        tabBarInactiveTintColor: '#ffff',
+        tabBarInactiveTintColor: isDarkTheme ? '#fff' : '#000',
         tabBarStyle: {
           display: 'flex',
           position: 'absolute',
-          bottom: 20,
-          left: 25,
-          right: 25,
-          elevation: 1,
-          backgroundColor: '#15142c',
-          borderRadius: 15,
+
+          elevation: 0,
+          backgroundColor: isDarkTheme ? '#15142c' : '#F8F8F8',
+          borderRadius: 20,
           height: 60,
 
           alignContent: 'center',
           alignItems: 'center',
           borderTopWidth: 0,
+          borderBottomWidth: 0,
         },
       }}>
       <Tab.Screen
@@ -42,9 +45,19 @@ const TabRoutes = () => {
           return {
             headerBackVisible: false,
 
-            tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="home" color={color} size={30} />
-            ),
+            tabBarIcon: ({focused, color, size}) => {
+              if (focused) {
+                return (
+                  <View className={`flex-col items-center`}>
+                    <Text className={`text-buttonColor text-lg`}>Home</Text>
+                    <Text className={`text-buttonColor`}>.</Text>
+                  </View>
+                );
+              }
+              return (
+                <MaterialCommunityIcons name="home" color={color} size={30} />
+              );
+            },
             headerShown: false,
           };
         }}
@@ -55,9 +68,17 @@ const TabRoutes = () => {
         options={({navigation}) => {
           return {
             headerBackVisible: false,
-            tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="account" color={color} size={30} />
-            ),
+            tabBarIcon: ({focused, color, size}) => {
+              if (focused) {
+                return (
+                  <View className={`flex-col items-center `}>
+                    <Text className={`text-buttonColor text-lg`}>Profile</Text>
+                    <Text className={`text-buttonColor `}>.</Text>
+                  </View>
+                );
+              }
+              return <Ionicons name="person-outline" color={color} size={24} />;
+            },
           };
         }}
       />
