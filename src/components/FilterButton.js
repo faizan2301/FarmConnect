@@ -18,8 +18,10 @@ const FilterButton = ({item, onPress, isSelected}) => {
         borderColor: isSelected ? '#000' : 'transparent',
         borderWidth: 1,
       }}>
-      <Image source={item.icon} className={`h-6 w-6`} />
-      <Text className="text-black dark:text-white" style={[styles.text]}>
+      <Image source={item.icon} className={`h-10 w-10`} />
+      <Text
+        className="text-secondaryTextColor text-sm mt-2 "
+        style={[styles.text]}>
         {item.title}
       </Text>
     </Pressable>
@@ -36,9 +38,6 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     backgroundColor: '#FEE2FF',
     padding: 5,
-  },
-  text: {
-    fontSize: 16,
   },
 });
 

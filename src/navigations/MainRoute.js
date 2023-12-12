@@ -2,6 +2,7 @@
 import React from 'react';
 import navigationStrings from '../constant/navigationStrings';
 import {
+  CategoryListScreen,
   LoginScreen,
   ProductDetailScreen,
   SignUpScreen,
@@ -52,6 +53,11 @@ const MainStack = Stack => {
       <Stack.Screen
         name={navigationStrings.PRODUCTDETAILSCREEN}
         component={ProductDetailScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={navigationStrings.CATEGORYLISTSCREEN}
+        component={CategoryListScreen}
         options={{headerShown: false}}
       />
     </>

@@ -8,6 +8,6 @@ export default {
   farmLogo: require('../assets/images/LogoFarm.png'),
   borcolli: require('../assets/images/broccoli.png'),
   cheese: require('../assets/images/cheese.png'),
-  grape: require('../assets/images/grape.jpg'),
+  grape: require('../assets/images/grape.png'),
   lentil: require('../assets/images/lentil.png'),
 };

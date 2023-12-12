@@ -167,8 +167,9 @@ const Home = props => {
             </Animated.Text>
           </View>
         </View>
-
-        <Icon name="bell" color="#f49c07" size={26} />
+        <View className={`bg-buttonColor p-3 rounded-2xl`}>
+          <Icon name="cart" color="#fff" size={26} />
+        </View>
       </View>
       <View className=" bg-secondaryLightColor dark:bg-secondaryDarkColor  rounded-xl flex-row items-center justify-between px-4 mx-2 mt-6 mb-2">
         <TouchableOpacity>

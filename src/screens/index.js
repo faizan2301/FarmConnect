@@ -5,3 +5,4 @@ export {default as VerifyOtpScreen} from './auth/VerifyOtp';
 export {default as HomeScreen} from './BottomTabs/Home/Home';
 export {default as ProductDetailScreen} from './CommonScreens/ProductDetailScreen';
 export {default as ProfileScreen} from './BottomTabs/Profile/Profile';
+export {default as CategoryListScreen} from './CommonScreens/CategoryListScreen';

@@ -9,4 +9,5 @@ export default {
   HOMESCREEN: 'HomeScreen',
   BOTTOMTAB: 'BottomTab',
   PRODUCTDETAILSCREEN: 'ProductDetailScreen',
+  CATEGORYLISTSCREEN: 'CategoryListScreen',
 };
