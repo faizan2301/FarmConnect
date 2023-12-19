@@ -29,9 +29,9 @@ const TabRoutes = () => {
 
           elevation: 0,
           backgroundColor: isDarkTheme ? '#15142c' : '#F8F8F8',
-          borderRadius: 20,
           height: 60,
-
+          borderTopRightRadius: 20,
+          borderTopLeftRadius: 20,
           alignContent: 'center',
           alignItems: 'center',
           borderTopWidth: 0,

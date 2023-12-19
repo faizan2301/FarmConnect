@@ -4,27 +4,26 @@ import navigationStrings from '../constant/navigationStrings';
 import {ProfileScreen} from '../screens';
 const Stack = createNativeStackNavigator();
 import React from 'react';
-import HeaderComponent from '../components/HeaderComponent';
+// import HeaderComponent from '../components/HeaderComponent';
 
 const ProfileStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: true,
-        headerStyle: {backgroundColor: '#99CC99'},
+        headerShown: false,
       }}>
       <Stack.Screen
         name={navigationStrings.PROFILESCREEN}
         component={ProfileScreen}
         options={({navigation}) => {
           return {
-            headerTitle: () => (
-              <HeaderComponent
-                navigation={navigation}
-                title={'Profile'}
-                isBack={true}
-              />
-            ),
+            // headerTitle: () => (
+            //   <HeaderComponent
+            //     navigation={navigation}
+            //     title={'Profile'}
+            //     isBack={true}
+            //   />
+            // ),
           };
         }}
       />
