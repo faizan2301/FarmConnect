@@ -9,7 +9,7 @@ const App = () => {
     <Provider store={store}>
       <SafeAreaView className="flex-1 bg-white">
         <Routes />
-        <FlashMessage position="bottom" />
+        <FlashMessage position="bottom" style={{paddingBottom: 10}} />
       </SafeAreaView>
     </Provider>
   );
