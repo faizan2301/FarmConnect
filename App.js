@@ -9,7 +9,10 @@ const App = () => {
     <Provider store={store}>
       <SafeAreaView className="flex-1 bg-white">
         <Routes />
-        <FlashMessage position="bottom" style={{paddingBottom: 10}} />
+        <FlashMessage
+          position="bottom"
+          style={{marginHorizontal: 15, marginVertical: 30, borderRadius: 10}}
+        />
       </SafeAreaView>
     </Provider>
   );

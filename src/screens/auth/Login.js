@@ -155,6 +155,7 @@ const Login = props => {
               ? secondaryDarkColor
               : secondaryLightColor,
             marginVertical: 20,
+            color: isDarkTheme ? 'white' : 'black',
           },
         ]}
         placeholder="Email"
@@ -182,7 +183,7 @@ const Login = props => {
           },
         ]}>
         <TextInput
-          style={styles.password}
+          style={[styles.password, {color: isDarkTheme ? 'white' : 'black'}]}
           placeholder="Password"
           secureTextEntry={!showPassword}
           placeholderTextColor={secondaryTextColor}

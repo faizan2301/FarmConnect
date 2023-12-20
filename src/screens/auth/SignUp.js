@@ -40,7 +40,6 @@ const SignUp = props => {
   const [mobileError, setMobileError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [focusedInput, setFocusedInput] = useState('');
-  const [modalVal, setModalVal] = useState(false);
   const [sinupApi, {error, data, isLoading, isError}] = useSignUpApiMutation();
   const bounceAniref = useRef();
   const onLogin = () => {
@@ -76,7 +75,6 @@ const SignUp = props => {
     } else {
       setPasswordError('');
     }
-    setModalVal(true);
     signup();
     // const interval = setInterval(() => {
     //   clearInterval(interval);
@@ -95,7 +93,7 @@ const SignUp = props => {
       var response = await sinupApi(body);
 
       handleResponse(response, true, () => {
-        navigation.goBack();
+        navigation.navigate(navigationStrings.VERIFYOTPSCREEN, {email});
       });
     } catch (e) {
       console.log('Catch error', e);
@@ -139,6 +137,7 @@ const SignUp = props => {
               ? secondaryDarkColor
               : secondaryLightColor,
             marginVertical: 20,
+            color: isDarkTheme ? 'white' : 'black',
           },
         ]}
         placeholder="Name"
@@ -164,6 +163,7 @@ const SignUp = props => {
               ? secondaryDarkColor
               : secondaryLightColor,
             marginVertical: 20,
+            color: isDarkTheme ? 'white' : 'black',
           },
         ]}
         placeholder="Email"
@@ -189,6 +189,7 @@ const SignUp = props => {
               ? secondaryDarkColor
               : secondaryLightColor,
             marginVertical: 20,
+            color: isDarkTheme ? 'white' : 'black',
           },
         ]}
         placeholder="Mobile Number"
@@ -218,7 +219,12 @@ const SignUp = props => {
           },
         ]}>
         <TextInput
-          style={styles.password}
+          style={[
+            styles.password,
+            {
+              color: isDarkTheme ? 'white' : 'black',
+            },
+          ]}
           placeholder="Password"
           placeholderTextColor={secondaryTextColor}
           secureTextEntry={!showPassword}
@@ -230,6 +236,7 @@ const SignUp = props => {
             setPasswordError('');
           }}
         />
+
         <Pressable
           onPress={() => setShowPassword(!showPassword)}
           className="self-center">
@@ -250,11 +257,13 @@ const SignUp = props => {
           <Text className="text-[#fff] text-xl">Register</Text>
         </Pressable>
       </Animatable.View> */}
-      <Pressable
-        onPress={onLogin}
-        className="w-full bg-buttonColor p-4 mt-6  rounded-2xl items-center justify-center">
-        <Text className="text-[#fff] text-xl">Register</Text>
-      </Pressable>
+      <Animatable.View ref={bounceAniref}>
+        <Pressable
+          onPress={onLogin}
+          className="w-full bg-buttonColor p-4 mt-6  rounded-2xl items-center justify-center">
+          <Text className="text-[#fff] text-xl">Register</Text>
+        </Pressable>
+      </Animatable.View>
     </BackGround>
   );
 };

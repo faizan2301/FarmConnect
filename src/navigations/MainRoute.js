@@ -33,17 +33,19 @@ const MainStack = Stack => {
       <Stack.Screen
         name={navigationStrings.VERIFYOTPSCREEN}
         component={VerifyOtpScreen}
-        options={({navigation}) => {
-          return {
-            headerTitle: () => (
-              <HeaderComponent
-                navigation={navigation}
-                title={'Verify otp'}
-                isBack={false}
-              />
-            ),
-          };
-        }}
+        options={{headerShown: false}}
+        // options={({navigation}) => {
+        //   return {
+
+        //     headerTitle: () => (
+        //       <HeaderComponent
+        //         navigation={navigation}
+        //         title={'Verify otp'}
+        //         isBack={false}
+        //       />
+        //     ),
+        //   };
+        // }}
       />
       <Stack.Screen
         name={navigationStrings.BOTTOMTAB}

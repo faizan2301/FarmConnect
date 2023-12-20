@@ -31,17 +31,19 @@ const SplashScreen = props => {
     }
   };
   // const navigate = () => {
-  //   navigation.replace(navigationStrings.LOGINSCREEN);
+  //   navigation.replace(navigationStrings.BOTTOMTAB);
   // };
   return (
-    <View className="flex-1 bg-white items-center justify-center p-1">
+    <View className="flex-1 bg-primaryLightColor dark:bg-primaryDarkColor items-center justify-center p-1">
       <LottieView
         source={imageConstant.splash}
         autoPlay
         loop
         className="h-56 w-full"
       />
-      <Text className="text-black text-3xl font-bold">Farm Connect</Text>
+      <Text className="text-black dark:text-white text-3xl font-bold">
+        Farm Connect
+      </Text>
     </View>
   );
 };
