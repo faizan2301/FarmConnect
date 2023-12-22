@@ -85,3 +85,12 @@ export const getFirebaseToken = async () => {
     return false;
   }
 };
+
+export const clearAll = async () => {
+  try {
+    await AsyncStorage.clear();
+  } catch (e) {
+    console.log(e.toString());
+    return false;
+  }
+};
