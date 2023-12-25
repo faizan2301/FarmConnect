@@ -9,7 +9,8 @@ import {
 export const saveCredentials = async value => {
   try {
     await saveTokentoAsync(value.access_token);
-    const jsonValue = JSON.stringify(value);
+    await saveRefreshTokentoAsync(value.refresh_token);
+    const jsonValue = JSON.stringify(value.user);
     await AsyncStorage.setItem(credentialsKey, jsonValue);
     return true;
   } catch (e) {
