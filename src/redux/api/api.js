@@ -1,5 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-const baseUrl = 'http://192.168.1.13:3500';
+// const baseUrl = 'http://192.168.1.33:3500';
+const baseUrl = 'https://farm-server.vercel.app/';
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({baseUrl: baseUrl}),

@@ -27,6 +27,7 @@ import {saveCredentials} from '../../common/AsyncStorageFunctions';
 import {useDispatch} from 'react-redux';
 import {saveToken} from '../../redux/slice/tokenSlice';
 import {saveUserData} from '../../redux/slice/authSlice';
+import Loader from '../../common/Loader';
 const Login = props => {
   const theme = useColorScheme();
   const isDarkTheme = theme === 'dark';
@@ -95,25 +96,7 @@ const Login = props => {
   };
   return (
     <BackGround>
-      <Modal
-        transparent={true}
-        animationType={'none'}
-        visible={isLoading}
-        style={{zIndex: 1100}}
-        onRequestClose={() => {}}>
-        <View style={styles.modalBackground}>
-          <View style={styles.activityIndicatorWrapper}>
-            {/* <ActivityIndicator animating={true} color="black" /> */}
-            <LottieView
-              style={styles.lottieStyle}
-              source={imageConstant.lottieLoader}
-              autoPlay
-              loop
-            />
-          </View>
-        </View>
-      </Modal>
-
+      <Loader isLoading={isLoading} />
       {/* <Text className="text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-xl mb-2 mt-4">
         Mobile number
       </Text> */}

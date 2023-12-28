@@ -1,4 +1,11 @@
-import {View, Text, StyleSheet, Pressable, useColorScheme} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  useColorScheme,
+  Modal,
+} from 'react-native';
 import React, {useState} from 'react';
 import OTPTextView from 'react-native-otp-textinput';
 import navigationStrings from '../../constant/navigationStrings';
@@ -6,6 +13,9 @@ import {showMessage} from 'react-native-flash-message';
 import {buttonColor} from '../../constant/colors';
 import {useVerifyOtpApiMutation} from '../../redux/api/api';
 import {errorMessage, handleResponse} from '../../common/functions';
+import LottieView from 'lottie-react-native';
+import imageConstant from '../../constant/imageConstant';
+import Loader from '../../common/Loader';
 
 const VerifyOtp = props => {
   const theme = useColorScheme();
@@ -45,6 +55,7 @@ const VerifyOtp = props => {
 
   return (
     <View className="flex-1 bg-primaryLightColor dark:bg-primaryDarkColor   items-center py-6 px-4">
+      <Loader isLoading={isLoading} />
       <Text className="text-black dark:text-white  text-2xl self-center ">
         Enter your otp we have sent you on{' '}
         <Text className={`text-secondaryButtonColor`}>{params.email}</Text>
@@ -116,5 +127,25 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: 'center',
   },
+  loginButtonContainer: {
+    alignSelf: 'center',
+    width: '100%',
+  },
+  modalBackground: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    backgroundColor: '#rgba(250, 250, 250, 0.5)',
+    zIndex: 1000,
+  },
+  activityIndicatorWrapper: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  lottieStyle: {height: 200, width: 200, alignSelf: 'center'},
 });
 export default VerifyOtp;

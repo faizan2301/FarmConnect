@@ -25,6 +25,7 @@ import {useSignUpApiMutation} from '../../redux/api/api';
 import {showMessage} from 'react-native-flash-message';
 import {someThingWentWrong} from '../../constant/strings';
 import {handleResponse} from '../../common/functions';
+import Loader from '../../common/Loader';
 
 const SignUp = props => {
   const theme = useColorScheme();
@@ -108,24 +109,7 @@ const SignUp = props => {
   };
   return (
     <BackGround>
-      <Modal
-        transparent={true}
-        animationType={'none'}
-        visible={isLoading}
-        style={{zIndex: 1100}}
-        onRequestClose={() => {}}>
-        <View style={styles.modalBackground}>
-          <View style={styles.activityIndicatorWrapper}>
-            {/* <ActivityIndicator animating={true} color="black" /> */}
-            <LottieView
-              style={styles.lottieStyle}
-              source={imageConstant.lottieLoader}
-              autoPlay
-              loop
-            />
-          </View>
-        </View>
-      </Modal>
+      <Loader isLoading={isLoading} />
       {/* <Text className="text-black text-xl mb-2">Name</Text> */}
       <TextInput
         style={[
