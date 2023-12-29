@@ -26,7 +26,12 @@ import {
   secondaryTextColor,
   vegieIconBg,
 } from '../../../constant/colors';
+import {useSelector} from 'react-redux';
+import {useGetCategoriesMutation} from '../../../redux/api/api';
+import Loader from '../../../common/Loader';
 const Home = props => {
+  var {token} = useSelector(state => state.token);
+
   const [filterOrder, setFilterOrder] = useState('fruits');
   const {navigation} = props;
   const [searchText, setSearchText] = useState();
@@ -34,11 +39,21 @@ const Home = props => {
   const [productData, setProductData] = useState(fruits);
   const theme = useColorScheme();
   const isDarkTheme = theme === 'dark';
+  const [getCategories, {categoriesData, isLoading, error}] =
+    useGetCategoriesMutation();
   const clearText = () => {
     setSearchText('');
   };
   const navigateToProductDetail = item => {
     navigation.navigate(navigationStrings.PRODUCTDETAILSCREEN, {item: item});
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  const getData = async () => {
+    var body = {token};
+    var response = await getCategories(body);
+    console.log('response', response.data);
   };
   const data = [
     {
@@ -90,8 +105,6 @@ const Home = props => {
 
   // Start the animation
   const renderItem2 = ({item}) => {
-    console.log(item);
-
     return (
       <Pressable
         onPress={() => navigateToProductDetail(item)}
@@ -174,6 +187,7 @@ const Home = props => {
           <Icon name="bell" color="#f49c07" size={26} />
         </View>
       </View> */}
+      <Loader isLoading={isLoading} />
       <View className="flex-row mx-2 mt-2 items-center justify-between">
         <View className="flex-row items-center">
           <Animated.Image
@@ -191,9 +205,9 @@ const Home = props => {
             </Animated.Text>
           </View>
         </View>
-        <View className={`bg-buttonColor p-3 rounded-2xl`}>
+        {/* <View className={`bg-buttonColor p-3 rounded-2xl`}>
           <Icon name="cart" color="#fff" size={26} />
-        </View>
+        </View> */}
       </View>
       <View className=" bg-secondaryLightColor dark:bg-secondaryDarkColor  rounded-xl flex-row items-center justify-between px-4 mx-2 mt-6 mb-2">
         <TouchableOpacity>

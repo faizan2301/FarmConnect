@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, Modal} from 'react-native';
 import React from 'react';
 import LottieView from 'lottie-react-native';
 import imageConstant from '../constant/imageConstant';
+import {BlurView} from '@react-native-community/blur';
 
 const Loader = ({isLoading}) => {
   return (
@@ -11,17 +12,19 @@ const Loader = ({isLoading}) => {
       visible={isLoading}
       style={{zIndex: 1100}}
       onRequestClose={() => {}}>
-      <View style={styles.modalBackground}>
-        <View style={styles.activityIndicatorWrapper}>
-          {/* <ActivityIndicator animating={true} color="black" /> */}
-          <LottieView
-            style={styles.lottieStyle}
-            source={imageConstant.lottieLoader}
-            autoPlay
-            loop
-          />
+      <BlurView style={StyleSheet.absoluteFill} blurType="dark" blurAmount={40}>
+        <View style={styles.modalBackground}>
+          <View style={styles.activityIndicatorWrapper}>
+            {/* <ActivityIndicator animating={true} color="black" /> */}
+            <LottieView
+              style={styles.lottieStyle}
+              source={imageConstant.lottieLoader}
+              autoPlay
+              loop
+            />
+          </View>
         </View>
-      </View>
+      </BlurView>
     </Modal>
   );
 };
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    backgroundColor: '#rgba(250, 250, 250, 0.5)',
+    backgroundColor: '#rgba(232, 241, 255, 0.5)',
     zIndex: 1000,
   },
   activityIndicatorWrapper: {
