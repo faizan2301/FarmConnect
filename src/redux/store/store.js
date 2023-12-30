@@ -4,11 +4,13 @@ import {setupListeners} from '@reduxjs/toolkit/query';
 import {api} from '../api/api';
 import userData from '../slice/authSlice';
 import tokenSlice from '../slice/tokenSlice';
+import categorySlice from '../slice/categorySlice';
 
 export const store = configureStore({
   reducer: {
     user: userData,
     token: tokenSlice,
+    category: categorySlice,
     [api.reducerPath]: api.reducer,
   },
   middleware: getDefaultMiddleware =>

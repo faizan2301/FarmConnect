@@ -26,20 +26,29 @@ import {
   secondaryTextColor,
   vegieIconBg,
 } from '../../../constant/colors';
-import {useSelector} from 'react-redux';
-import {useGetCategoriesMutation} from '../../../redux/api/api';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  useGetCategoriesMutation,
+  useGetProductsMutation,
+} from '../../../redux/api/api';
 import Loader from '../../../common/Loader';
+import {saveCategoryData} from '../../../redux/slice/categorySlice';
+import {handleResponse} from '../../../common/functions';
 const Home = props => {
+  console.log('Home');
   var {token} = useSelector(state => state.token);
-
-  const [filterOrder, setFilterOrder] = useState('fruits');
+  const dispatch = useDispatch();
+  const {category} = useSelector(state => state.category);
+  const [filterOrder, setFilterOrder] = useState();
+  const [getPData, {data: pdata, isLoading: pdataLoading, error: pError}] =
+    useGetProductsMutation();
   const {navigation} = props;
   const [searchText, setSearchText] = useState();
   const [searchClicked, setSearchClicked] = useState(false);
-  const [productData, setProductData] = useState(fruits);
+  const [productData, setProductData] = useState([]);
   const theme = useColorScheme();
   const isDarkTheme = theme === 'dark';
-  const [getCategories, {categoriesData, isLoading, error}] =
+  const [getCategories, {data: categoriesData, isLoading, error}] =
     useGetCategoriesMutation();
   const clearText = () => {
     setSearchText('');
@@ -49,11 +58,13 @@ const Home = props => {
   };
   useEffect(() => {
     getData();
-  }, []);
+  }, [0]);
   const getData = async () => {
     var body = {token};
     var response = await getCategories(body);
-    console.log('response', response.data);
+    handleResponse(response, false, res => {
+      changeProduct(res[0]);
+    });
   };
   const data = [
     {
@@ -64,19 +75,19 @@ const Home = props => {
     },
     {
       title: 'Vegie',
-      key: 'vegetables',
+      key: 'Vegetables',
       color: vegieIconBg,
       icon: imageConstant.borcolli,
     },
     {
       title: 'Dairy',
-      key: 'dairyProducts',
+      key: 'Dairy Products',
       color: dairyIconBg,
       icon: imageConstant.cheese,
     },
     {
       title: 'Pulses',
-      key: 'pulses',
+      key: 'Pulses',
       color: pulsesIconBg,
       icon: imageConstant.lentil,
     },
@@ -84,25 +95,28 @@ const Home = props => {
     // {title: 'Seeds', key: 'seeds'},
   ];
 
-  const changeProduct = key => {
-    if (key === 'fruits') {
+  const changeProduct = async item => {
+    await dispatch(saveCategoryData(item));
+    setFilterOrder(item.categoryName);
+
+    getProductData(item._id);
+    if (item.categoryName === 'Fruits') {
       setProductData(fruits);
-    } else if (key === 'vegetables') {
+    } else if (item.categoryName === 'Vegetables') {
       setProductData(vegetable);
-    } else if (key === 'dairyProducts') {
+    } else if (item.categoryName === 'Dairy Products') {
       setProductData(dairyProducts);
-    }
-    // else if (key === 'spices') {
-    //   setProductData(spices);
-    // }
-    else if (key === 'pulses') {
+    } else if (item.categoryName === 'Pulses') {
       setProductData(pulses);
     }
-    // else if (key === 'seeds') {
-    //   setProductData(seeds);
-    // }
   };
-
+  const getProductData = async id => {
+    var body = {token, categoryId: id, skip: 0};
+    var response = await getPData(body);
+    handleResponse(response, false, res => {
+      console.log('res', res.data);
+    });
+  };
   // Start the animation
   const renderItem2 = ({item}) => {
     return (
@@ -154,16 +168,17 @@ const Home = props => {
       // </Pressable>
     );
   };
-  const renderItem = ({item}) => (
-    <FilterButton
-      item={item}
-      onPress={() => {
-        setFilterOrder(item.key);
-        changeProduct(item.key);
-      }}
-      isSelected={filterOrder === item.key}
-    />
-  );
+  const renderItem = ({item}) => {
+    return (
+      <FilterButton
+        item={item}
+        onPress={() => {
+          changeProduct(item);
+        }}
+        isSelected={filterOrder === item.categoryName}
+      />
+    );
+  };
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-primaryDarkColor px-2  ">
       {/* <View className="flex-row mx-2 mt-2 items-center justify-between">
@@ -235,9 +250,9 @@ const Home = props => {
       </View>
 
       <FlatList
-        data={data}
+        data={categoriesData}
         renderItem={renderItem}
-        keyExtractor={item => item.key}
+        keyExtractor={item => item._id}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={style.flatListContent}

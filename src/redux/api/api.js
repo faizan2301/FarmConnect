@@ -1,7 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {getToken} from '../../common/AsyncStorageFunctions';
-// const baseUrl = 'http://192.168.1.3:3500';
-const baseUrl = 'https://farm-server.vercel.app/';
+const baseUrl = 'http://192.168.1.29:3500';
+// const baseUrl = 'https://farm-server.vercel.app/';
 
 export const api = createApi({
   reducerPath: 'api',

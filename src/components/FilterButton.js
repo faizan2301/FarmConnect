@@ -13,15 +13,15 @@ const FilterButton = ({item, onPress, isSelected}) => {
         alignItems: 'center',
         marginHorizontal: 12,
         marginVertical: 2,
-        backgroundColor: item.color,
+        backgroundColor: item.bgColor,
         padding: 20,
         borderRadius: 20,
         borderColor: isSelected ? '#000' : 'transparent',
         borderWidth: 1,
       }}>
-      <Image source={item.icon} className={`h-10 w-10`} />
+      <Image source={{uri: item.image}} className={`h-10 w-10`} />
       <Text className="text-secondaryTextColor text-sm  " style={[styles.text]}>
-        {item.title}
+        {item.categoryName}
       </Text>
     </Pressable>
   );

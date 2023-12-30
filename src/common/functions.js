@@ -1,5 +1,6 @@
 import {showMessage} from 'react-native-flash-message';
 import {someThingWentWrong, successMessage} from '../constant/strings';
+import {showError, showSuccess} from '../utils/helper';
 
 export const handleResponse = (
   response,
@@ -9,11 +10,7 @@ export const handleResponse = (
   console.log('Handle response', response);
   if (response.data) {
     if (toShowSuccessMessage === true) {
-      showMessage({
-        message: response.data.message ?? successMessage,
-        type: 'success',
-        icon: 'success',
-      });
+      showSuccess(response.data.message ?? successMessage);
     }
 
     // Call the success callback if provided
@@ -22,11 +19,7 @@ export const handleResponse = (
     }
     return response.data;
   } else if (response.error && response.error.data) {
-    showMessage({
-      message: response.error.data.message ?? someThingWentWrong,
-      type: 'danger',
-      icon: 'danger',
-    });
+    showError(response.error.data.message ?? someThingWentWrong);
   } else {
     errorMessage();
   }
