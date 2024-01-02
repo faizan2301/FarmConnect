@@ -13,6 +13,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {buttonColor, iconColor} from '../../constant/colors';
 import Feather from 'react-native-vector-icons/Feather';
+import {useSelector} from 'react-redux';
 const counterReducer = (state, action) => {
   switch (action.type) {
     case 'INCREMENT':
@@ -27,15 +28,10 @@ const counterReducer = (state, action) => {
 // Define the initial state
 const initialState = {count: 0};
 const ProductDetailScreen = props => {
+  const {product} = useSelector(state => state.product);
   const theme = useColorScheme();
   const isDarkTheme = theme === 'dark';
-  const {
-    navigation,
-    route: {
-      params: {item},
-    },
-  } = props;
-  console.log(item);
+  const {navigation} = props;
 
   const [state, dispatch] = useReducer(counterReducer, initialState);
   return (
@@ -45,27 +41,31 @@ const ProductDetailScreen = props => {
           onPress={() => {
             navigation.goBack();
           }}>
-          <Icon name="arrow-back-ios" color={iconColor} size={26} />
+          <Icon
+            name="arrow-back-ios"
+            color={isDarkTheme ? 'white' : 'black'}
+            size={26}
+          />
         </Pressable>
-        <Feather name="shopping-cart" color={iconColor} size={26} />
+        {/* <Feather name="shopping-cart" color={iconColor} size={26} /> */}
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Animated.Image
-          sharedTransitionTag={`image-${item.id}`}
+          sharedTransitionTag={`image-${product._id}`}
           style={styles.image}
-          source={{uri: item.image}}
+          source={{uri: product.image}}
         />
         <View className={`p-4 flex-col`}>
           <Animated.Text
             className="text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-xl font-bold mt-3 "
-            sharedTransitionTag={`text-${item.id}`}>
-            {item.name}
+            sharedTransitionTag={`text-${product._id}`}>
+            {product.productName}
           </Animated.Text>
           <Text className="text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-lg ">
-            {item.price}/lb
+            20/lb
           </Text>
           <Text className="text-secondaryTextColor text-sm mt-6 mb-4">
-            {item.description}
+            {product.discription}
           </Text>
           <View className="flex-row items-center">
             <EvilIcons
@@ -74,8 +74,18 @@ const ProductDetailScreen = props => {
               size={22}
             />
             <Text className="text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-xl ">
-              {item.location}
+              Texas,America
             </Text>
+          </View>
+          <Text className="text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-xl my-2 ">
+            Varieties :
+          </Text>
+          <View className="flex-col">
+            {product.varieties.map((e, index) => (
+              <Text key={index} className="text-secondaryTextColor">
+                {e}
+              </Text>
+            ))}
           </View>
 
           <View className="flex-row items-center mt-4">
@@ -85,7 +95,7 @@ const ProductDetailScreen = props => {
               <Feather name="minus" size={24} color={buttonColor} />
             </Pressable>
             <Text
-              className={`text-primaryLightTxtColor dark:bg-primaryDarkTxtColor text-xl mx-4`}>
+              className={`text-primaryLightTxtColor dark:text-primaryDarkTxtColor text-xl mx-4 `}>
               {state.count}
             </Text>
             <Pressable
@@ -94,7 +104,7 @@ const ProductDetailScreen = props => {
               <Feather name="plus" size={24} color="white" />
             </Pressable>
             <Pressable className={`bg-buttonColor p-3 mx-6 rounded-xl`}>
-              <Text className={`text-white text-xl`}>Add to cart</Text>
+              <Text className={`text-white text-xl`}>Buy now</Text>
             </Pressable>
           </View>
         </View>

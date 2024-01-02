@@ -5,12 +5,14 @@ import {api} from '../api/api';
 import userData from '../slice/authSlice';
 import tokenSlice from '../slice/tokenSlice';
 import categorySlice from '../slice/categorySlice';
+import productSlice from '../slice/productSlice';
 
 export const store = configureStore({
   reducer: {
     user: userData,
     token: tokenSlice,
     category: categorySlice,
+    product: productSlice,
     [api.reducerPath]: api.reducer,
   },
   middleware: getDefaultMiddleware =>

@@ -38,7 +38,7 @@ const VerifyOtp = props => {
       var body = {otp};
       var response = await verifyOtpApi(body);
       handleResponse(response, false, res => {
-        console.log(res);
+       
         if (res.success == true) {
           showMessage({
             message: 'Verification successfull please login',

@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    backgroundColor: '#rgba(232, 241, 255, 0.5)',
+    backgroundColor: '#rgba(29, 29, 54, 0.2)',
     zIndex: 1000,
   },
   activityIndicatorWrapper: {

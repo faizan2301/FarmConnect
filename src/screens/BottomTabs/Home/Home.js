@@ -13,12 +13,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Animated from 'react-native-reanimated';
 import navigationStrings from '../../../constant/navigationStrings';
 import FilterButton from '../../../components/FilterButton';
-import fruits from '../../../common/data/fruits';
-import vegetable from '../../../common/data/vegetable';
-import dairyProducts from '../../../common/data/dairyProducts';
-import pulses from '../../../common/data/pulses';
+// import fruits from '../../../common/data/fruits';
+// import vegetable from '../../../common/data/vegetable';
+// import dairyProducts from '../../../common/data/dairyProducts';
+// import pulses from '../../../common/data/pulses';
 import imageConstant from '../../../constant/imageConstant';
 import {SafeAreaView} from 'react-native-safe-area-context';
+
 import {
   dairyIconBg,
   fruitsIconBg,
@@ -34,11 +35,10 @@ import {
 import Loader from '../../../common/Loader';
 import {saveCategoryData} from '../../../redux/slice/categorySlice';
 import {handleResponse} from '../../../common/functions';
+import {saveProductData} from '../../../redux/slice/productSlice';
 const Home = props => {
-  console.log('Home');
   var {token} = useSelector(state => state.token);
   const dispatch = useDispatch();
-  const {category} = useSelector(state => state.category);
   const [filterOrder, setFilterOrder] = useState();
   const [getPData, {data: pdata, isLoading: pdataLoading, error: pError}] =
     useGetProductsMutation();
@@ -53,8 +53,9 @@ const Home = props => {
   const clearText = () => {
     setSearchText('');
   };
-  const navigateToProductDetail = item => {
-    navigation.navigate(navigationStrings.PRODUCTDETAILSCREEN, {item: item});
+  const navigateToProductDetail = async item => {
+    await dispatch(saveProductData(item));
+    navigation.navigate(navigationStrings.PRODUCTDETAILSCREEN);
   };
   useEffect(() => {
     getData();
@@ -100,21 +101,21 @@ const Home = props => {
     setFilterOrder(item.categoryName);
 
     getProductData(item._id);
-    if (item.categoryName === 'Fruits') {
-      setProductData(fruits);
-    } else if (item.categoryName === 'Vegetables') {
-      setProductData(vegetable);
-    } else if (item.categoryName === 'Dairy Products') {
-      setProductData(dairyProducts);
-    } else if (item.categoryName === 'Pulses') {
-      setProductData(pulses);
-    }
+    // if (item.categoryName === 'Fruits') {
+    //   setProductData(fruits);
+    // } else if (item.categoryName === 'Vegetables') {
+    //   setProductData(vegetable);
+    // } else if (item.categoryName === 'Dairy Products') {
+    //   setProductData(dairyProducts);
+    // } else if (item.categoryName === 'Pulses') {
+    //   setProductData(pulses);
+    // }
   };
   const getProductData = async id => {
     var body = {token, categoryId: id, skip: 0};
     var response = await getPData(body);
     handleResponse(response, false, res => {
-      console.log('res', res.data);
+      setProductData(res.data);
     });
   };
   // Start the animation
@@ -122,9 +123,9 @@ const Home = props => {
     return (
       <Pressable
         onPress={() => navigateToProductDetail(item)}
-        className="flex-1 flex-row mx-2 mb-2 overflow-hidden p-4  bg-secondaryLightColor dark:bg-[#1d1c37] rounded-xl  justify-start items-center shadow-xl ">
+        className="flex-1 flex-row mx-2 mb-2 overflow-hidden p-4  bg-secondaryLightColor dark:bg-[#1d1c37] rounded-xl  items-center  shadow-xl ">
         <Animated.Image
-          sharedTransitionTag={`image-${item.id}`}
+          sharedTransitionTag={`image-${item._id}`}
           source={{uri: item.image}}
           className="h-28 w-28 rounded-xl self-center"
           loadingIndicatorSource={imageConstant.loader}
@@ -132,14 +133,12 @@ const Home = props => {
         <View className={`flex-col mx-4`}>
           <Animated.Text
             className="text-black dark:text-white text-xl"
-            sharedTransitionTag={`text-${item.id}`}>
-            {item.name}
+            sharedTransitionTag={`text-${item._id}`}>
+            {item.productName}
           </Animated.Text>
           <Text className="text-secondaryTextColor text-sm">Price per kg</Text>
 
-          <Text className="text-black dark:text-white text-xl mb-2">
-            {item.price}
-          </Text>
+          <Text className="text-black dark:text-white text-xl mb-2">20</Text>
         </View>
       </Pressable>
 
@@ -202,7 +201,7 @@ const Home = props => {
           <Icon name="bell" color="#f49c07" size={26} />
         </View>
       </View> */}
-      <Loader isLoading={isLoading} />
+      <Loader isLoading={isLoading || pdataLoading} />
       <View className="flex-row mx-2 mt-2 items-center justify-between">
         <View className="flex-row items-center">
           <Animated.Image
@@ -257,14 +256,17 @@ const Home = props => {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={style.flatListContent}
       />
-      <View className={`h-2`} />
+      <View className={`h-2 `} />
       <FlatList
         data={productData}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem2}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item._id}
         // numColumns={2}
-        contentContainerStyle={{paddingBottom: 80}}
+        contentContainerStyle={{
+          paddingBottom: 80,
+          justifyContent: 'flex-start',
+        }}
       />
     </SafeAreaView>
   );
