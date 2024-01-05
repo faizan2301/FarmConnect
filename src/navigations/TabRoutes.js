@@ -5,9 +5,12 @@ import navigationStrings from '../constant/navigationStrings';
 import HomeStack from './HomeStack';
 import ProfileStack from './ProfileStack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Text, View, useColorScheme} from 'react-native';
 import {buttonColor, secondaryTextColor} from '../constant/colors';
+import {SellScreen} from '../screens';
+import SellStack from './SellStack';
 const Tab = createBottomTabNavigator();
 const TabRoutes = () => {
   const theme = useColorScheme();
@@ -46,17 +49,43 @@ const TabRoutes = () => {
             headerBackVisible: false,
 
             tabBarIcon: ({focused, color, size}) => {
-              if (focused) {
-                return (
-                  <View className={`flex-col items-center`}>
-                    <Text className={`text-buttonColor text-lg`}>Home</Text>
-                    <Text className={`text-buttonColor`}>.</Text>
-                  </View>
-                );
-              }
+              // if (focused) {
+              //   return (
+              //     <View className={`flex-col items-center`}>
+              //       <Text className={`text-buttonColor text-lg`}>Home</Text>
+              //       <Text className={`text-buttonColor`}>.</Text>
+              //     </View>
+              //   );
+              // }
               return (
-                <MaterialCommunityIcons name="home" color={color} size={30} />
+                <MaterialCommunityIcons
+                  name="home-outline"
+                  color={color}
+                  size={30}
+                />
               );
+            },
+            headerShown: false,
+          };
+        }}
+      />
+      <Tab.Screen
+        name={navigationStrings.SELLSTACK}
+        component={SellStack}
+        options={({navigation}) => {
+          return {
+            headerBackVisible: false,
+
+            tabBarIcon: ({focused, color, size}) => {
+              // if (focused) {
+              //   return (
+              //     <View className={`flex-col items-center`}>
+              //       <Text className={`text-buttonColor text-lg`}>Home</Text>
+              //       <Text className={`text-buttonColor`}>.</Text>
+              //     </View>
+              //   );
+              // }
+              return <MaterialIcons name="sell" color={color} size={size} />;
             },
             headerShown: false,
           };
@@ -69,14 +98,14 @@ const TabRoutes = () => {
           return {
             headerBackVisible: false,
             tabBarIcon: ({focused, color, size}) => {
-              if (focused) {
-                return (
-                  <View className={`flex-col items-center `}>
-                    <Text className={`text-buttonColor text-lg`}>Profile</Text>
-                    <Text className={`text-buttonColor `}>.</Text>
-                  </View>
-                );
-              }
+              // if (focused) {
+              //   return (
+              //     <View className={`flex-col items-center `}>
+              //       <Text className={`text-buttonColor text-lg`}>Profile</Text>
+              //       <Text className={`text-buttonColor `}>.</Text>
+              //     </View>
+              //   );
+              // }
               return <Ionicons name="person-outline" color={color} size={24} />;
             },
           };

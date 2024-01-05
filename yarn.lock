@@ -6202,10 +6202,10 @@ react-native-otp-textinput@^1.1.1:
   dependencies:
     react "^16.8.6"
 
-react-native-paper@^5.10.1:
-  version "5.10.1"
-  resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-5.10.1.tgz#89d5bb51a9604518d470626cd56f6fc29b2164e1"
-  integrity sha512-/VNo9T87dtPBdQQI5CcaXjHtIAmlOoIe60W/iBcwUjZTVKMI///ZxcmxRSkACUYTcwyGAbkjhHHPqN2knrXp9Q==
+react-native-paper@^5.11.6:
+  version "5.11.6"
+  resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-5.11.6.tgz#6b783f50872aa61d34c6dcd32bfae91d1804c7c7"
+  integrity sha512-+WpBC1aYQ3SMolnOZAdJGoMFWgKoiBym+s8251QyT+ZbBIWd/NYJPoA4wmjGPeUc1vcnJKV7+Uy42T2zp2ts6Q==
   dependencies:
     "@callstack/react-theme-provider" "^3.0.9"
     color "^3.1.2"
